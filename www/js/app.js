@@ -51,6 +51,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
 
 
+  .state('index.newcare', {
+    url: '/newcare',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/newcare.html'
+      }
+    }
+  })
+
   .state('index.browse', {
       url: '/browse',
       views: {

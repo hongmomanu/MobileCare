@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state,$ionicPopup) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -27,7 +27,22 @@ angular.module('starter.controllers', [])
   // Open the login modal
   $scope.logout = function() {
     //$scope.modal.show();
-    alert(1);
+    //alert(1);
+
+      var confirmPopup = $ionicPopup.confirm({
+        title: '提示',
+        template: '你确定要退出应用么?'
+      });
+      confirmPopup.then(function(res) {
+        if(res) {
+          //console.log('You are sure');
+          $state.go('app');
+        } else {
+          //console.log('You are not sure');
+        }
+      });
+
+
   };
 
   // Perform the login action when the user submits the login form
