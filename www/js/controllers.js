@@ -57,6 +57,13 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);*/
   };
+
+
+  $scope.newcarenext=function(user){
+
+    console.log(user);
+
+  }
 })
 
 .controller('PlaylistsCtrl', function($scope) {
