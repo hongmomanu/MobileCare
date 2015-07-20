@@ -1,0 +1,9 @@
+<ion-view view-title="选择模板">
+    <ion-content>
+        <ion-list>
+            <ion-item ng-repeat="caretemplist in caretemplists" href="#/index/choosetemp/{{caretemplist.id}}">
+                {{caretemplist.title}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

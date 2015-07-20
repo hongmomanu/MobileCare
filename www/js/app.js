@@ -60,6 +60,26 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
+   .state('index.choosetemp', {
+    url: '/choosetemp',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/choosetemp.html',
+        controller: 'CaretemplistsCtrl'
+      }
+    }
+  })
+
+    .state('index.caretemplistsingle', {
+      url: '/choosetemp/:sigleId',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/caretemplist.html',
+          controller: 'CaretemplistCtrl'
+        }
+      }
+    })
+
   .state('index.browse', {
       url: '/browse',
       views: {
