@@ -1,19 +1,13 @@
-<ion-view view-title="新建急救">
+<ion-view view-title="急救类型">
     <ion-content class="padding">
-        <div class="list" >
-            <label class="item item-input">
-                <span class="input-label">患者姓名:</span>
-                <input type="text" ng-model="user.username">
-            </label>
-
-        </div>
-        <div class="padding">
-            <button class="button button-block button-positive" ng-click="newcarenext(user)">
-                下一步
+        <div class=" button-bar">
+            <button class="button button-light button-android" ng-class="{ 'button\-positive': demo == 'nocard' }" ng-click="newCare('nocard')">
+                无名氏病者
             </button>
-            <!--<p class="text-center">
-                <a href="#/forgot-password">Forgot password</a>
-            </p>-->
+            <button class="button button-light button-android" ng-class="{ 'button\-positive': demo == 'card' }" ng-click="newCare('card')">
+                知道健康卡
+            </button>
+
         </div>
     </ion-content>
 </ion-view>

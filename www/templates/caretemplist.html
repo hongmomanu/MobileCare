@@ -1,5 +1,29 @@
-<ion-view view-title="模板内容">
+<ion-view view-title="处置内容">
   <ion-content>
-    <h1>模板内容</h1>
+   <!-- <h1>模板内容</h1>-->
+    <form  name="newCareForm" class="falecomigo" novalidate form-manager >
+    <div class="list">
+
+      <div ng-repeat="item in devList" class="item item-divider">
+        {{ item.text }}
+
+        <ion-checkbox ng-repeat="detailitem in item.data"
+                      ng-model="detailitem.checked"
+                      ng-checked="detailitem.checked">
+          {{ detailitem.text }}
+        </ion-checkbox>
+
+      </div>
+
+
+
+
+
+
+
+
+
+    </div>
+      </form>
   </ion-content>
 </ion-view>

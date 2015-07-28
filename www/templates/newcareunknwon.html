@@ -1,0 +1,21 @@
+<ion-view view-title="新建急救">
+    <ion-content class="padding">
+        <form  name="faleComigoForm" class="falecomigo" novalidate form-manager >
+        <div class="list" >
+            <label class="item item-input">
+                <span class="input-label">患者姓名:</span>
+                <input type="text" ng-model="user.username">
+            </label>
+
+        </div>
+        <div class="padding">
+            <button class="button button-block button-positive" ng-click="newcarenocardnext(user)">
+                下一步
+            </button>
+            <!--<p class="text-center">
+                <a href="#/forgot-password">Forgot password</a>
+            </p>-->
+        </div>
+            </form>
+    </ion-content>
+</ion-view>

@@ -59,13 +59,23 @@ angular.module('starter.controllers', [])
   };
 
 
-  $scope.newcarenext=function(user){
+  /*$scope.newcarenext=function(user){
 
     console.log(user);
     $state.go('index.choosetemp');
 
-  }
+  };
+
+    $scope.demo = 'ios';
+    $scope.newCare = function(p) {
+        document.body.classList.remove('platform-ios');
+        document.body.classList.remove('platform-android');
+        document.body.classList.add('platform-' + p);
+        $scope.demo = p;
+    }*/
 })
+
+
 
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
@@ -77,22 +87,7 @@ angular.module('starter.controllers', [])
     { title: 'Cowbell', id: 6 }
   ];
 })
- .controller('CaretemplistsCtrl', function($scope) {
-  $scope.caretemplists = [
-    { title: '中毒', id: 1 },
-    { title: '车祸', id: 2 },
-    { title: '脑溢血', id: 3 },
-    { title: '心肌梗塞', id: 4 },
-    { title: '安眠药', id: 5 },
-    { title: '中风', id: 6 }
-  ];
-})
 
-.controller('CaretemplistCtrl', function($scope, $stateParams,$http) {
-
-      testobj=$http;
-      console.log($stateParams);
-})
 .controller('PlaylistCtrl', function($scope, $stateParams,$http) {
 
       testobj=$http;
