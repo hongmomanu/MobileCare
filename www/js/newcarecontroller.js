@@ -29,23 +29,63 @@ angular.module('main.newcarecontroller', [])
     ];
 
 })
-.controller('CaretemplistCtrl', function($scope, $stateParams,$http) {
+.controller('CaretemplistCtrl', function($scope, $stateParams,$http,$ionicLoading) {
 
     testobj=$http;
     console.log($stateParams);
     $scope.devList = [
-        { text: "检查1",data:[{ text: "挂盐水", checked: true },
+        { text: "处置1",data:[{ text: "挂盐水", checked: true },
             { text: "打针", checked: false },
             { text: "输氧", checked: false }]},
-        { text: "检查2",data:[{ text: "挂盐水", checked: true },
+        { text: "处置2",data:[{ text: "挂盐水", checked: true },
             { text: "打针", checked: false },
             { text: "输氧", checked: false }]},
-        { text: "检查3",data:[{ text: "挂盐水", checked: true },
+        { text: "处置3",data:[{ text: "挂盐水", checked: true },
             { text: "打针", checked: false },
             { text: "输氧", checked: false }]},
     ];
 
-});
+
+
+}).directive('formManager', function($ionicLoading) {
+        return {
+            restrict : 'A',
+            controller : function($scope) {
+
+                $scope.$watch('newCareForm.$valid', function() {
+                    console.log("Form validity changed. Now : " + $scope.newCareForm.$valid);
+                });
+
+                $scope.savecare = function() {
+
+                    if($scope.newCareForm.$valid) {
+                        //$scope.finalSubmit();
+                        //alert(1)
+                        $ionicLoading.show({ template: 'Submitting...', duration: 1500})
+                    } else {
+                        $ionicLoading.show({ template: 'Form Is Not Valid', duration: 1500})
+                    }
+
+
+                }
+            }
+        }
+    })
+ .directive('textarea', function() {
+        return {
+            restrict: 'E',
+            link: function(scope, element, attr){
+                var update = function(){
+                    element.css("height", "auto");
+                    var height = element[0].scrollHeight;
+                    element.css("height", element[0].scrollHeight + "px");
+                };
+                scope.$watch(attr.ngModel, function(){
+                    update();
+                });
+            }
+        };
+    });
 
 
 /*.controller('CaretemplistsCtrl', function($scope) {

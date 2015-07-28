@@ -17,13 +17,27 @@
 
 
 
+      <div class="item item-divider">
+        自定义处置:
+        <div class="row">
+          <div class="col">
+          <textarea style="width: 100%" id="TextArea" rows="2" ng-model="item.description" ng-Required="true" name="description" placeholder="根据情况在这里输入特殊处置....">
+          </textarea>
+          </div>
+        </div>
 
-
-
-
-
+      </div>
 
     </div>
+
+
+      <div class="padding container">
+        <div class="row">
+          <button ng-click="cancel()"  class="button button-assertive button-small col col-20 col-offset-20"  > 取消 </button>
+          <button ng-click="savecare()" class="button button-balanced  button-small col col-20 col-offset-20"> 保存 </button>
+        </div>
+      </div>
+
       </form>
   </ion-content>
 </ion-view>
