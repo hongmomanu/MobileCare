@@ -33,16 +33,30 @@ angular.module('main.newcarecontroller', [])
 
     testobj=$http;
     console.log($stateParams);
+    $scope.formcontent = {
+        a:true,
+        b:false,
+        c:false,
+        d:true,
+        e:false,
+        f:false,
+        g:true,
+        h:false,
+        i:false,
+        myoption:''
+
+    };
+
     $scope.devList = [
-        { text: "处置1",data:[{ text: "挂盐水", checked: true },
-            { text: "打针", checked: false },
-            { text: "输氧", checked: false }]},
-        { text: "处置2",data:[{ text: "挂盐水", checked: true },
-            { text: "打针", checked: false },
-            { text: "输氧", checked: false }]},
-        { text: "处置3",data:[{ text: "挂盐水", checked: true },
-            { text: "打针", checked: false },
-            { text: "输氧", checked: false }]},
+        { text: "处置1",data:[{ text: "挂盐水", checked: true,name:'a' },
+            { text: "打针", checked: false,name:'b' },
+            { text: "输氧", checked: false,name:'c' }]},
+        { text: "处置2",data:[{ text: "挂盐水", checked: true ,name:'d'},
+            { text: "打针", checked: false ,name:'e'},
+            { text: "输氧", checked: false ,name:'f'}]},
+        { text: "处置3",data:[{ text: "挂盐水", checked: true ,name:'g'},
+            { text: "打针", checked: false ,name:'h'},
+            { text: "输氧", checked: false ,name:'i'}]},
     ];
 
 
@@ -61,7 +75,11 @@ angular.module('main.newcarecontroller', [])
                     if($scope.newCareForm.$valid) {
                         //$scope.finalSubmit();
                         //alert(1)
-                        $ionicLoading.show({ template: 'Submitting...', duration: 1500})
+                        console.log( $scope.formcontent);
+                        $ionicLoading.show({ template: 'Submitting...'});
+                        setTimeout(function(){
+                            $ionicLoading.hide();
+                        },2000)
                     } else {
                         $ionicLoading.show({ template: 'Form Is Not Valid', duration: 1500})
                     }
