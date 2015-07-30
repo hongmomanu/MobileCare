@@ -99,7 +99,8 @@ angular.module('main.newcarecontroller', [])
                             $ionicHistory.nextViewOptions({
                                 disableBack: true
                             });
-                            $state.go('index.search');
+                            //$state.go('index.search');
+                            $state.go('index.single',{playlistId:2});
                         },2000)
                     } else {
                         $ionicLoading.show({ template: 'Form Is Not Valid', duration: 1500})
