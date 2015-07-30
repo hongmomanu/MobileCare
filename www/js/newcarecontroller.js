@@ -5,7 +5,7 @@ angular.module('main.newcarecontroller', [])
   $scope.newcarenocardnext=function(user){
 
     console.log(user);
-    $state.go('index.choosetemp',user);
+    $state.go('index.selecttemp',user);
 
   };
 
@@ -13,7 +13,7 @@ angular.module('main.newcarecontroller', [])
 
        console.log(user);
        //alert(11);
-       $state.go('index.choosetemp', user);
+       $state.go('index.selecttemp', user);
     //$state.go('index.choosetemp');
 
   };
@@ -34,9 +34,7 @@ angular.module('main.newcarecontroller', [])
 
 })
 .controller('ChooseTempCtrl',function($scope, $stateParams,$http,$ionicLoading){
-        console.log(1)
         console.log($stateParams);
-        console.log(2)
 
         $scope.caretemplists = [
             { title: '中毒', id: 1 },

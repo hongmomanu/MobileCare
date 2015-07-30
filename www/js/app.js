@@ -79,8 +79,8 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
     }
   })
 
-   .state('index.choosetemp', {
-    url: '/choosetemp/:username/:cardno',
+   .state('index.selecttemp', {
+    url: '/selecttemp/:username:cardno',
     views: {
       'menuContent': {
         templateUrl: 'templates/choosetemp.html',
