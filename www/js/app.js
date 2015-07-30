@@ -69,13 +69,23 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
       }
     }
   })
+   .state('index.newcarewithcard', {
+    url: '/newcarewithcard',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/newcarewithcard.html',
+        controller: 'NewCareCtrl'
+      }
+    }
+  })
 
    .state('index.choosetemp', {
-    url: '/choosetemp',
+    url: '/choosetemp/:username/:cardno',
     views: {
       'menuContent': {
         templateUrl: 'templates/choosetemp.html',
-        controller: 'NewCareCtrl'
+        /*params: ['user'],*/
+        controller: 'ChooseTempCtrl'
       }
     }
   })

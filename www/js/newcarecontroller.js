@@ -5,7 +5,16 @@ angular.module('main.newcarecontroller', [])
   $scope.newcarenocardnext=function(user){
 
     console.log(user);
-    $state.go('index.choosetemp');
+    $state.go('index.choosetemp',user);
+
+  };
+
+   $scope.newcarecardnext=function(user){
+
+       console.log(user);
+       //alert(11);
+       $state.go('index.choosetemp', user);
+    //$state.go('index.choosetemp');
 
   };
 
@@ -17,16 +26,26 @@ angular.module('main.newcarecontroller', [])
         $scope.demo = p;
         if(p=='nocard'){
             $state.go('index.newcareunknwon');
+        }else{
+            $state.go('index.newcarewithcard');
         }
     }
-    $scope.caretemplists = [
-        { title: '中毒', id: 1 },
-        { title: '车祸', id: 2 },
-        { title: '脑溢血', id: 3 },
-        { title: '心肌梗塞', id: 4 },
-        { title: '安眠药', id: 5 },
-        { title: '中风', id: 6 }
-    ];
+
+
+})
+.controller('ChooseTempCtrl',function($scope, $stateParams,$http,$ionicLoading){
+        console.log(1)
+        console.log($stateParams);
+        console.log(2)
+
+        $scope.caretemplists = [
+            { title: '中毒', id: 1 },
+            { title: '车祸', id: 2 },
+            { title: '脑溢血', id: 3 },
+            { title: '心肌梗塞', id: 4 },
+            { title: '安眠药', id: 5 },
+            { title: '中风', id: 6 }
+        ];
 
 })
 .controller('CaretemplistCtrl', function($scope, $stateParams,$http,$ionicLoading) {
@@ -64,7 +83,7 @@ angular.module('main.newcarecontroller', [])
 }).directive('formManager', function($ionicLoading) {
         return {
             restrict : 'A',
-            controller : function($scope) {
+            controller : function($scope,$state,$ionicHistory) {
 
                 $scope.$watch('newCareForm.$valid', function() {
                     console.log("Form validity changed. Now : " + $scope.newCareForm.$valid);
@@ -79,6 +98,10 @@ angular.module('main.newcarecontroller', [])
                         $ionicLoading.show({ template: 'Submitting...'});
                         setTimeout(function(){
                             $ionicLoading.hide();
+                            $ionicHistory.nextViewOptions({
+                                disableBack: true
+                            });
+                            $state.go('index.search');
                         },2000)
                     } else {
                         $ionicLoading.show({ template: 'Form Is Not Valid', duration: 1500})
