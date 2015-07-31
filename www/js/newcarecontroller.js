@@ -78,7 +78,23 @@ angular.module('main.newcarecontroller', [])
 
 
 
-}).directive('formManager', function($ionicLoading) {
+}).controller('CaredetailsCtrl', function($scope) {
+        $scope.caredetails = [
+            { title: 'Reggae', id: 1 },
+            { title: 'Chill', id: 2 },
+            { title: 'Dubstep', id: 3 },
+            { title: 'Indie', id: 4 },
+            { title: 'Rap', id: 5 },
+            { title: 'Cowbell', id: 6 }
+        ];
+    })
+
+.controller('CaredetailCtrl', function($scope, $stateParams,$http) {
+
+    testobj=$http;
+    console.log(22);
+})
+.directive('formManager', function($ionicLoading) {
         return {
             restrict : 'A',
             controller : function($scope,$state,$ionicHistory) {
@@ -100,7 +116,7 @@ angular.module('main.newcarecontroller', [])
                                 disableBack: true
                             });
                             //$state.go('index.search');
-                            $state.go('index.single',{playlistId:2});
+                            $state.go('index.singlecare',{caredetailId:2});
                         },2000)
                     } else {
                         $ionicLoading.show({ template: 'Form Is Not Valid', duration: 1500})

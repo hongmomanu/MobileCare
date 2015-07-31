@@ -1,0 +1,9 @@
+<ion-view view-title="急救患者">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="caredetail in caredetails" href="#/index/caredetails/{{caredetail.id}}">
+        {{caredetail.title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

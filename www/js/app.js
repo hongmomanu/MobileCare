@@ -117,6 +117,23 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
         }
       }
     })
+      .state('index.caredetails', {
+      url: '/caredetails',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/caredetails.html',
+          controller: 'CaredetailsCtrl'
+        }
+      }
+    }).state('index.singlecare', {
+            url: '/caredetails/:caredetailId',
+            views: {
+              'menuContent': {
+                templateUrl: 'templates/caredetail.html',
+                controller: 'CaredetailsCtrl'
+              }
+            }
+     })
 
   .state('index.single', {
     url: '/playlists/:playlistId',
