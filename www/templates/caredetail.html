@@ -1,6 +1,9 @@
 <ion-view view-title="诊断">
   <ion-content>
     <div class="list" >
+      <div class="item item-divider">
+        基本描述
+        </div>
       <label class="item item-input">
         <span class="input-label">主因:</span>
         <input type="text" ng-model="caredetail.reason">
@@ -9,24 +12,46 @@
         <span class="input-label">病史:</span>
         <input type="text" ng-model="caredetail.history">
       </label>
-      <label class="item item-input">
+
+      <div class="item item-divider">
+        陈述对象: {{ data.clientSide }}
+      </div>
+
+      <div class="button-bar" >
+        <ion-radio style="width: 100%;" ng-repeat="item in clientSideList"
+                   ng-value="item.value"
+                   ng-model="data.clientSide">
+          {{ item.text }}
+        </ion-radio>
+
+      </div>
+
+
+
+      <!--<label class="item item-input">
         <span class="input-label">客体:</span>
         <input type="text" ng-model="caredetail.client">
-      </label>
+      </label>-->
       <label class="item item-input">
-        <span class="input-label">主体:</span>
-        <input type="text" ng-model="caredetail.self">
+        <span class="input-label">陈述内容:</span>
+
+        <textarea style="width: 100%"  rows="2" ng-model="caredetail.content" ng-Required="true" name="description" placeholder="根据情况输入诊断处置....">
+         </textarea>
       </label>
+
+      <div class="item item-divider">
+        诊断
+      </div>
       <label class="item item-input">
-        <span class="input-label">诊断:</span>
-         <textarea style="width: 100%" id="TextArea" rows="2" ng-model="formcontent['myoption']" ng-Required="true" name="description" placeholder="根据情况输入诊断处置....">
+        <span class="input-label">诊断结果:</span>
+         <textarea style="width: 100%"  rows="2" ng-model="caredetail.result" ng-Required="true" name="description" placeholder="根据情况输入诊断处置....">
          </textarea>
       </label>
 
     </div>
     <div class="padding">
       <button class="button button-block button-positive" ng-click="newcarecardnext(carduser)">
-        下一步
+        保存
       </button>
       <!--<p class="text-center">
           <a href="#/forgot-password">Forgot password</a>

@@ -87,6 +87,14 @@ angular.module('main.newcarecontroller', [])
             { title: 'Rap', id: 5 },
             { title: 'Cowbell', id: 6 }
         ];
+
+        $scope.data = {
+            clientSide: '主体'
+        };
+        $scope.clientSideList = [
+            { text: "主体", value: "主体" },
+            { text: "客体", value: "客体" }
+        ];
     })
 
 .controller('CaredetailCtrl', function($scope, $stateParams,$http) {
