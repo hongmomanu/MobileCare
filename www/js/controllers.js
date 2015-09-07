@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state,$ionicPopup) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state,$ionicPopup,userService) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -47,15 +47,23 @@ angular.module('starter.controllers', [])
 
   // Perform the login action when the user submits the login form
   $scope.signIn = function() {
-    console.log('Doing login', $scope.user);
+      userService.userlogin($scope.user.username,$scope.user.password).then(function(response){
+          if(response.data.success){
+              $state.go('index.search');
+          }else{
+              var alertPopup = $ionicPopup.alert({
+                  title: '登录提示',
+                  template: '用户名或密码错误'
+              });
+              alertPopup.then(function(res) {
+                  //console.log(res);
+              });
+          }
+      });
 
-    $state.go('index.search');
 
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-   /* $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);*/
+
+
   };
 
 
