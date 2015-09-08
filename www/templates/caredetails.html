@@ -1,5 +1,9 @@
 <ion-view view-title="急救患者">
   <ion-content>
+    <ion-refresher
+            pulling-text="下拉刷新..."
+            on-refresh="doRefresh()">
+    </ion-refresher>
     <ion-list>
       <ion-item class="item item-avatar-left  item-icon-right" ng-repeat="caredetail in caredetails" href="#/index/caredetails/{{caredetail._id}}">
         <img src="img/person.jpg">

@@ -14,13 +14,13 @@
       </label>
 
       <div class="item item-divider">
-        陈述对象: {{ data.clientSide }}
+        陈述对象: {{ caredetail.clientSide }}
       </div>
 
       <div class="button-bar" >
         <ion-radio style="width: 100%;" ng-repeat="item in clientSideList"
                    ng-value="item.value"
-                   ng-model="data.clientSide">
+                   ng-model="caredetail.clientSide">
           {{ item.text }}
         </ion-radio>
 

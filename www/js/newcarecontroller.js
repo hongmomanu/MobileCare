@@ -42,7 +42,6 @@ angular.module('main.newcarecontroller', [])
             $scope.caretemplists=response.data;
         });
 
-
 })
 .controller('CaretemplistCtrl', function($scope, $stateParams,$http,$ionicLoading,tempService,$rootScope) {
 
@@ -57,22 +56,33 @@ angular.module('main.newcarecontroller', [])
 
 }).controller('CaredetailsCtrl', function($scope,tempService) {
 
+
         tempService.getRecordByPage(1,10).then(function(response){
             $scope.caredetails=response.data;
         });
 
+        $scope.doRefresh=function(){
+            //alert(1);
+            tempService.getRecordByPage(1,10).then(function(response){
+                $scope.caredetails=response.data;
+                $scope.$broadcast("scroll.refreshComplete");
+            });
+        };
 
-        $scope.data = {
+
+
+    })
+
+.controller('CaredetailCtrl', function($scope, $stateParams,$http) {
+
+
+        $scope.caredetail = {
             clientSide: '主体'
         };
         $scope.clientSideList = [
             { text: "主体", value: "主体" },
             { text: "客体", value: "客体" }
         ];
-
-    })
-
-.controller('CaredetailCtrl', function($scope, $stateParams,$http) {
 
     //testobj=$http;
      console.log(12121);
@@ -82,7 +92,7 @@ angular.module('main.newcarecontroller', [])
 .directive('formManager', function($ionicLoading) {
         return {
             restrict : 'A',
-            controller : function($scope,$state,$ionicHistory) {
+            controller : function($scope,$state,$ionicHistory,$ionicPopup,tempService) {
 
                 $scope.$watch('newCareForm.$valid', function() {
                     console.log("Form validity changed. Now : " + $scope.newCareForm.$valid);
@@ -95,17 +105,27 @@ angular.module('main.newcarecontroller', [])
                         //alert(1)
                         console.log( $scope.devList);
                         console.log( $scope.carerecord);
-                        $ionicLoading.show({ template: 'Submitting...'});
-                        setTimeout(function(){
+                        $ionicLoading.show({ template: '数据提交中...'});
+                        $scope.carerecord['tempcontent']=$scope.devList;
+                        $scope.carerecord['caredetail']={};
+                        $scope.carerecord['time']=new Date();
+                        tempService.addnewRecord($scope.carerecord).then(function(response){
                             $ionicLoading.hide();
-                            $ionicHistory.nextViewOptions({
-                                disableBack: true
-                            });
+                            if(response.data.success){
+                                $ionicHistory.nextViewOptions({
+                                    disableBack: true
+                                });
+                                $state.go('index.singlecare',{caredetailId:response.data.id})
+                            }else{
+                                var alertPopup = $ionicPopup.alert({
+                                    title: '错误提示',
+                                    template: '提交数据失败'
+                                });
+                            }
+                        });
 
-                            $state.go('index.singlecare',{caredetailId:2});
-                        },2000)
                     } else {
-                        $ionicLoading.show({ template: 'Form Is Not Valid', duration: 1500})
+                        $ionicLoading.show({ template: '表单未填写完毕', duration: 1500})
                     }
 
 

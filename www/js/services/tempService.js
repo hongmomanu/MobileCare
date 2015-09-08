@@ -22,6 +22,20 @@ angular.module('app.services')
                     {params:{page:page,limit:limit}}).then(function(response) {
                             return response;
                 });
+            },
+            getRecordById: function(id) {
+
+                return $http.get(serverurl+"temp/getrecordbyid",
+                    {params:{id:id}}).then(function(response) {
+                            return response;
+                });
+            },
+            addnewRecord: function(item) {
+
+                return $http.post(serverurl+"temp/addrecord",
+                    {params:item}).then(function(response) {
+                            return response;
+                });
             }
         }
     });
