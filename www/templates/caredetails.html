@@ -2,7 +2,7 @@
   <ion-content>
     <ion-list>
       <ion-item class="item item-avatar-left  item-icon-right" ng-repeat="caredetail in caredetails" href="#/index/caredetails/{{caredetail._id}}">
-        <img src="img/ionic.png">
+        <img src="img/person.jpg">
         <h2>姓名:{{caredetail.username}} </h2>
         <p>卡号:{{caredetail.cardno}} </p>
         <i class="badge badge-stable item-note elementCenterAlign">{{caredetail.time | date:'yyyy-MM-dd HH:mm'}}</i>
@@ -10,4 +10,4 @@
       </ion-item>
     </ion-list>
   </ion-content>
-</iin-view>
+</ion-view>
