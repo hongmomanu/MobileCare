@@ -10,12 +10,10 @@ angular.module('main.newcarecontroller', [])
   };
 
    $scope.newcarecardnext=function(user){
-
        console.log(user);
        //alert(11);
        $state.go('index.selecttemp', user);
     //$state.go('index.choosetemp');
-
   };
 
     $scope.demo = 'nocard';
@@ -33,21 +31,27 @@ angular.module('main.newcarecontroller', [])
 
 
 })
-.controller('ChooseTempCtrl',function($scope, $stateParams,$http,$ionicLoading,tempService){
+.controller('ChooseTempCtrl',function($scope, $stateParams,$http,$ionicLoading,tempService,$rootScope){
         console.log($stateParams);
+
+        $rootScope.$on('tempinit', function (event, otherscope) {
+            otherscope.carerecord=$stateParams;
+        });
+
         tempService.getCaretemp().then(function(response){
             $scope.caretemplists=response.data;
         });
 
 
 })
-.controller('CaretemplistCtrl', function($scope, $stateParams,$http,$ionicLoading,tempService) {
+.controller('CaretemplistCtrl', function($scope, $stateParams,$http,$ionicLoading,tempService,$rootScope) {
 
     testobj=$http;
     console.log($stateParams);
     tempService.getCaretempByid($stateParams.sigleId).then(function(response){
         $scope.devList=response.data.content;
     });
+    $rootScope.$broadcast('tempinit', $scope);
 
 
 
@@ -68,12 +72,15 @@ angular.module('main.newcarecontroller', [])
             { text: "主体", value: "主体" },
             { text: "客体", value: "客体" }
         ];
+
     })
 
 .controller('CaredetailCtrl', function($scope, $stateParams,$http) {
 
-    testobj=$http;
-    console.log(22);
+    //testobj=$http;
+     console.log(12121);
+    console.log($stateParams);
+
 })
 .directive('formManager', function($ionicLoading) {
         return {
@@ -90,6 +97,7 @@ angular.module('main.newcarecontroller', [])
                         //$scope.finalSubmit();
                         //alert(1)
                         console.log( $scope.devList);
+                        console.log( $scope.carerecord);
                         $ionicLoading.show({ template: 'Submitting...'});
                         setTimeout(function(){
                             $ionicLoading.hide();

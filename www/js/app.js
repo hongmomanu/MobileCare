@@ -131,7 +131,7 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
             views: {
               'menuContent': {
                 templateUrl: 'templates/caredetail.html',
-                controller: 'CaredetailsCtrl'
+                controller: 'CaredetailCtrl'
               }
             }
      })

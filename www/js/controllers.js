@@ -67,20 +67,7 @@ angular.module('starter.controllers', [])
   };
 
 
-  /*$scope.newcarenext=function(user){
 
-    console.log(user);
-    $state.go('index.choosetemp');
-
-  };
-
-    $scope.demo = 'ios';
-    $scope.newCare = function(p) {
-        document.body.classList.remove('platform-ios');
-        document.body.classList.remove('platform-android');
-        document.body.classList.add('platform-' + p);
-        $scope.demo = p;
-    }*/
 })
 
 
