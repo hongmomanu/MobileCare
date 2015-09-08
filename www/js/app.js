@@ -4,6 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
+var serverurl="http://127.0.0.1:3000/";
 angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontroller','app.services'])
 
 .run(function($ionicPlatform) {

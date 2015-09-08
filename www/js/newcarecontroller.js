@@ -33,48 +33,21 @@ angular.module('main.newcarecontroller', [])
 
 
 })
-.controller('ChooseTempCtrl',function($scope, $stateParams,$http,$ionicLoading){
+.controller('ChooseTempCtrl',function($scope, $stateParams,$http,$ionicLoading,tempService){
         console.log($stateParams);
+        tempService.getCaretemp().then(function(response){
+            $scope.caretemplists=response.data;
+        });
 
-        $scope.caretemplists = [
-            { title: '中毒', id: 1 },
-            { title: '车祸', id: 2 },
-            { title: '脑溢血', id: 3 },
-            { title: '心肌梗塞', id: 4 },
-            { title: '安眠药', id: 5 },
-            { title: '中风', id: 6 }
-        ];
 
 })
-.controller('CaretemplistCtrl', function($scope, $stateParams,$http,$ionicLoading) {
+.controller('CaretemplistCtrl', function($scope, $stateParams,$http,$ionicLoading,tempService) {
 
     testobj=$http;
     console.log($stateParams);
-    $scope.formcontent = {
-        a:true,
-        b:false,
-        c:false,
-        d:true,
-        e:false,
-        f:false,
-        g:true,
-        h:false,
-        i:false,
-        myoption:''
-
-    };
-
-    $scope.devList = [
-        { text: "处置1",data:[{ text: "挂盐水", checked: true,name:'a' },
-            { text: "打针", checked: false,name:'b' },
-            { text: "输氧", checked: false,name:'c' }]},
-        { text: "处置2",data:[{ text: "挂盐水", checked: true ,name:'d'},
-            { text: "打针", checked: false ,name:'e'},
-            { text: "输氧", checked: false ,name:'f'}]},
-        { text: "处置3",data:[{ text: "挂盐水", checked: true ,name:'g'},
-            { text: "打针", checked: false ,name:'h'},
-            { text: "输氧", checked: false ,name:'i'}]},
-    ];
+    tempService.getCaretempByid($stateParams.sigleId).then(function(response){
+        $scope.devList=response.data.content;
+    });
 
 
 
@@ -116,14 +89,14 @@ angular.module('main.newcarecontroller', [])
                     if($scope.newCareForm.$valid) {
                         //$scope.finalSubmit();
                         //alert(1)
-                        console.log( $scope.formcontent);
+                        console.log( $scope.devList);
                         $ionicLoading.show({ template: 'Submitting...'});
                         setTimeout(function(){
                             $ionicLoading.hide();
                             $ionicHistory.nextViewOptions({
                                 disableBack: true
                             });
-                            //$state.go('index.search');
+
                             $state.go('index.singlecare',{caredetailId:2});
                         },2000)
                     } else {

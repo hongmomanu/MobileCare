@@ -6,7 +6,7 @@ angular.module('app.services')
         return {
             userlogin: function(username,password) {
 
-                return $http.get("http://127.0.0.1:3000/user/login",
+                return $http.get(serverurl+"user/login",
                     { params:{ "username": username, "password": password } }).then(function(response) {
                             return response;
                 });
