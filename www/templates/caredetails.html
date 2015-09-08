@@ -1,8 +1,12 @@
 <ion-view view-title="急救患者">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="caredetail in caredetails" href="#/index/caredetails/{{caredetail.id}}">
-        {{caredetail.title}}
+      <ion-item class="item item-avatar-left  item-icon-right" ng-repeat="caredetail in caredetails" href="#/index/caredetails/{{caredetail._id}}">
+        <img src="img/ionic.png">
+        <h2>姓名:{{caredetail.username}} </h2>
+        <p>卡号:{{caredetail.cardno}} </p>
+        <i class="badge badge-stable">{{caredetail.time | date:'yyyy-MM-dd HH:mm'}}</i>
+        <i class="icon ion-ios-arrow-right"></i>
       </ion-item>
     </ion-list>
   </ion-content>

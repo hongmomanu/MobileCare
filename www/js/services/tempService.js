@@ -15,6 +15,13 @@ angular.module('app.services')
                 return $http.get(serverurl+"temp/gettempbyid",{params:{id:id}}).then(function(response) {
                             return response;
                 });
+            },
+            getRecordByPage: function(page,limit) {
+
+                return $http.get(serverurl+"temp/getrecord",
+                    {params:{page:page,limit:limit}}).then(function(response) {
+                            return response;
+                });
             }
         }
     });

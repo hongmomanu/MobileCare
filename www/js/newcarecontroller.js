@@ -55,15 +55,12 @@ angular.module('main.newcarecontroller', [])
 
 
 
-}).controller('CaredetailsCtrl', function($scope) {
-        $scope.caredetails = [
-            { title: 'Reggae', id: 1 },
-            { title: 'Chill', id: 2 },
-            { title: 'Dubstep', id: 3 },
-            { title: 'Indie', id: 4 },
-            { title: 'Rap', id: 5 },
-            { title: 'Cowbell', id: 6 }
-        ];
+}).controller('CaredetailsCtrl', function($scope,tempService) {
+
+        tempService.getRecordByPage(1,10).then(function(response){
+            $scope.caredetails=response.data;
+        });
+
 
         $scope.data = {
             clientSide: '主体'
