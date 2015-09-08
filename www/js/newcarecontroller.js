@@ -73,20 +73,24 @@ angular.module('main.newcarecontroller', [])
 
     })
 
-.controller('CaredetailCtrl', function($scope, $stateParams,$http) {
+.controller('CaredetailCtrl', function($scope, $stateParams,tempService) {
 
 
-        $scope.caredetail = {
-            clientSide: '主体'
-        };
+
         $scope.clientSideList = [
             { text: "主体", value: "主体" },
             { text: "客体", value: "客体" }
         ];
+        tempService.getRecordById($stateParams.caredetailId).then(function(response){
+            $scope.devList=response.data.tempcontent;
+            $scope.caredetail=response.data.caredetail;
+            if(!$scope.caredetail.clientSide)$scope.caredetail.clientSide='主体'
+
+        });
 
     //testobj=$http;
      console.log(12121);
-    console.log($stateParams);
+     console.log($stateParams);
 
 })
 .directive('formManager', function($ionicLoading) {
@@ -108,7 +112,7 @@ angular.module('main.newcarecontroller', [])
                         $ionicLoading.show({ template: '数据提交中...'});
                         $scope.carerecord['tempcontent']=$scope.devList;
                         $scope.carerecord['caredetail']={};
-                        $scope.carerecord['time']=new Date();
+                        //$scope.carerecord['time']=new Date();
                         tempService.addnewRecord($scope.carerecord).then(function(response){
                             $ionicLoading.hide();
                             if(response.data.success){
