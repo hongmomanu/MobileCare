@@ -71,7 +71,7 @@ angular.module('main.newcarecontroller', [])
 
     })
 
-    .controller('CaredetailCtrl', function ($scope, $stateParams, tempService, $state, $ionicPopup, $ionicLoading) {
+    .controller('CaredetailCtrl', function ($scope, $ionicModal,$stateParams, tempService, $state, $ionicPopup, $ionicLoading) {
 
 
         $scope.clientSideList = [
@@ -94,7 +94,7 @@ angular.module('main.newcarecontroller', [])
                 scope: $scope
             }).then(function (modal) {
                 $scope.videomodal = modal;
-
+                $scope.videomodal.show();
             });
 
         };
