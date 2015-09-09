@@ -90,6 +90,12 @@ angular.module('main.newcarecontroller', [])
 
         $scope.playvideo = function () {
             alert(11);
+            $ionicModal.fromTemplateUrl('templates/videomodel.html', {
+                scope: $scope
+            }).then(function (modal) {
+                $scope.videomodal = modal;
+
+            });
 
         };
         $scope.saverecord = function () {
