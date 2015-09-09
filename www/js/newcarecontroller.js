@@ -98,6 +98,11 @@ angular.module('main.newcarecontroller', [])
             });
 
         };
+        $scope.closemodel=function(){
+
+            $scope.videomodal.hide();
+
+        };
         $scope.saverecord = function () {
 
             var data = angular.copy($scope.savedata);
