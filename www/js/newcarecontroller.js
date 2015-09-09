@@ -89,7 +89,7 @@ angular.module('main.newcarecontroller', [])
         //testobj=$http;
 
         $scope.playvideo = function () {
-            alert(11);
+            //alert(11);
             $ionicModal.fromTemplateUrl('templates/videomodel.html', {
                 scope: $scope
             }).then(function (modal) {
@@ -98,7 +98,7 @@ angular.module('main.newcarecontroller', [])
             });
 
         };
-        $scope.closemodel=function(){
+        $scope.closemodel = function () {
 
             $scope.videomodal.hide();
 
