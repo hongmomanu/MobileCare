@@ -2,8 +2,24 @@
 .preWrap {
     white-space: pre-wrap;
 }
+
 .elementCenterAlign {
     position: absolute;
     top: 50% !important;
     transform: translateY(-50%);
+}
+
+#videodivwrap {
+    display: none;
+    top: 0px;
+    right: 1px !important;
+    right: 18px;
+    z-index: 999;
+    width: 200px;
+    line-height: 30px;
+    position: fixed;
+    border: 1px solid #fff;
+    text-align: center;
+    color: #fff;
+    background: #000;
 }

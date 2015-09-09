@@ -36,6 +36,13 @@ angular.module('app.services')
                     {params:item}).then(function(response) {
                             return response;
                 });
+            },
+            saveRecordById:function(id,content){
+
+                return $http.post(serverurl+"temp/saverecord",
+                    {id:id,content:content}).then(function(response) {
+                        return response;
+                    });
             }
         }
     });

@@ -73,7 +73,7 @@ angular.module('main.newcarecontroller', [])
 
     })
 
-.controller('CaredetailCtrl', function($scope, $stateParams,tempService) {
+.controller('CaredetailCtrl', function($scope, $stateParams,tempService,$state,$ionicPopup,$ionicLoading) {
 
 
 
@@ -82,15 +82,39 @@ angular.module('main.newcarecontroller', [])
             { text: "客体", value: "客体" }
         ];
         tempService.getRecordById($stateParams.caredetailId).then(function(response){
-            $scope.devList=response.data.tempcontent;
-            $scope.caredetail=response.data.caredetail;
-            if(!$scope.caredetail.clientSide)$scope.caredetail.clientSide='主体'
+            $scope.savedata=response.data;
+            /*$scope.devList=response.data.tempcontent;
+            $scope.caredetail=response.data.caredetail;*/
+            if(!$scope.savedata.caredetail.clientSide)$scope.savedata.caredetail.clientSide='主体'
 
         });
 
     //testobj=$http;
-     console.log(12121);
-     console.log($stateParams);
+
+        $scope.playvideo=function(){
+            alert(11);
+
+        };
+        $scope.saverecord=function(){
+
+            var data=angular.copy($scope.savedata);
+            delete  data._id;
+            delete data.time;
+            tempService.saveRecordById($stateParams.caredetailId,data).then(function(response){
+                if(response.data.success){
+                    //$state.go('index.caredetails');
+                    $ionicLoading.show({ template: '表单保存完毕', duration: 1500});
+                }else{
+                    var alertPopup = $ionicPopup.alert({
+                        title: '错误提示',
+                        template: '提交数据失败'
+                    });
+                }
+
+            });
+
+
+        };
 
 })
 .directive('formManager', function($ionicLoading) {

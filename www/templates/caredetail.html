@@ -1,18 +1,54 @@
 <ion-view view-title="诊断">
   <ion-content>
 
-    <div class="list">
+    <div class="item item-divider">
+      基本信息:
+      <div class="row">
+        <div class="col">
+          <label class="item item-input" >
+            <span class="input-label">姓名:</span>
+            <input  type="text" ng-model="savedata.username">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">卡号:</span>
+            <input type="text" ng-model="savedata.cardno">
+          </label>
 
-      <div ng-repeat="item in devList.checklist" class="item item-divider">
-        {{ item.text }}
-
-        <ion-checkbox ng-repeat="detailitem in item.data"
-                      ng-model="detailitem.checked"
-                >
-          {{ detailitem.text }}
-        </ion-checkbox>
-
+        </div>
       </div>
+
+    </div>
+
+
+    <div class="item item-divider">
+      基本处理:
+      <div class="row">
+        <div class="col">
+          <div ng-repeat="item in savedata.tempcontent.checklist" class="item item-divider">
+            {{ item.text }}
+
+            <div class="row">
+              <div class="col">
+                <ion-checkbox ng-repeat="detailitem in item.data"
+                              ng-model="detailitem.checked"
+                        >
+                  {{ detailitem.text }}
+                </ion-checkbox>
+
+              </div></div>
+
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
 
 
 
@@ -20,66 +56,87 @@
         自定义处置:
         <div class="row">
           <div class="col">
-          <textarea style="width: 100%" id="TextArea" rows="2" ng-model="devList['options']" ng-Required="true" name="description" placeholder="根据情况在这里输入特殊处置....">
+          <textarea style="width: 100%" id="TextArea" rows="2" ng-model="savedata.tempcontent['options']" ng-Required="true" name="description" placeholder="根据情况在这里输入特殊处置....">
           </textarea>
           </div>
         </div>
 
       </div>
 
-    </div>
 
-    <div class="list" >
+
+
       <div class="item item-divider">
         基本描述
+
+        <div class="row">
+          <div class="col">
+            <label class="item item-input">
+              <span class="input-label">主因:</span>
+              <input type="text" ng-model="savedata.caredetail.reason">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">病史:</span>
+              <input type="text" ng-model="savedata.caredetail.history">
+            </label>
+
+            <div class="item item-divider">
+              陈述对象: {{ savedata.caredetail.clientSide }}
+            </div>
+
+            <div class="button-bar" >
+              <ion-radio style="width: 100%;" ng-repeat="item in clientSideList"
+                         ng-value="item.value"
+                         ng-model="savedata.caredetail.clientSide">
+                {{ item.text }}
+              </ion-radio>
+
+            </div>
+
+
+
+            <!--<label class="item item-input">
+              <span class="input-label">客体:</span>
+              <input type="text" ng-model="caredetail.client">
+            </label>-->
+            <label class="item item-input">
+              <span class="input-label">陈述内容:</span>
+
+        <textarea style="width: 100%"  rows="2" ng-model="savedata.caredetail.content" ng-Required="true" name="description" placeholder="根据情况输入诊断处置....">
+         </textarea>
+            </label>
+
+            <div class="item item-divider">
+              诊断
+            </div>
+            <label class="item item-input">
+              <span class="input-label">诊断结果:</span>
+         <textarea style="width: 100%"  rows="2" ng-model="savedata.caredetail.result" ng-Required="true" name="description" placeholder="根据情况输入诊断处置....">
+         </textarea>
+            </label>
+          </div>
         </div>
-      <label class="item item-input">
-        <span class="input-label">主因:</span>
-        <input type="text" ng-model="caredetail.reason">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">病史:</span>
-        <input type="text" ng-model="caredetail.history">
-      </label>
-
-      <div class="item item-divider">
-        陈述对象: {{ caredetail.clientSide }}
-      </div>
-
-      <div class="button-bar" >
-        <ion-radio style="width: 100%;" ng-repeat="item in clientSideList"
-                   ng-value="item.value"
-                   ng-model="caredetail.clientSide">
-          {{ item.text }}
-        </ion-radio>
 
       </div>
 
 
-
-      <!--<label class="item item-input">
-        <span class="input-label">客体:</span>
-        <input type="text" ng-model="caredetail.client">
-      </label>-->
-      <label class="item item-input">
-        <span class="input-label">陈述内容:</span>
-
-        <textarea style="width: 100%"  rows="2" ng-model="caredetail.content" ng-Required="true" name="description" placeholder="根据情况输入诊断处置....">
-         </textarea>
-      </label>
-
-      <div class="item item-divider">
-        诊断
+    <div class="item item-divider">
+      录像:
+      <div class="row">
+        <div class="col">
+          <li class="item item-button-right">
+            <h2><a href="">播放地址</a></h2>
+            <a class="button button-clear icon ion-videocamera" ng-click="playvideo()"></a>
+          </li>
+        </div>
       </div>
-      <label class="item item-input">
-        <span class="input-label">诊断结果:</span>
-         <textarea style="width: 100%"  rows="2" ng-model="caredetail.result" ng-Required="true" name="description" placeholder="根据情况输入诊断处置....">
-         </textarea>
-      </label>
-
     </div>
+
+
+
+
     <div class="padding">
-      <button class="button button-block button-positive" ng-click="newcarecardnext(carduser)">
+      <button class="button button-block button-positive" ng-click="saverecord()">
         保存
       </button>
       <!--<p class="text-center">
