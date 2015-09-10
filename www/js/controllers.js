@@ -78,37 +78,90 @@ angular.module('starter.controllers', [])
             {title: 'Cowbell', id: 6}
         ];
     })
-    .controller('videoCtrl', function ($scope,$rootScope) {
+    .controller('videoCtrl', function ($scope,$rootScope,$timeout) {
         console.log('videoCtrl');
         $rootScope.$on('startrecording', function (event) {
             console.log('startrecording');
             $('#videodivwrap').show('slow');
 
-            //video.src="img/movie.ogg";
-            //video.play();
-
             var mediaConstraints = {
-                audio: true, // don't forget audio!
+                audio: true,
                 video: true                         // don't forget video!
             };
+            var socket = io(socketurl);
+            socket.on('finished', function (data) {
+                console.log(data);
+            })
+            socket.on('connected', function (data) {
+                console.log(data);
+            });
+            var last=false;
+            var videoRecorder=null;
+            var audioRecorder=null;
+
+            $timeout(function () {
+                last=true;
+                //mediaRecorder.stop();
+                //mediaRecorder.clearOldRecordedFrames();
+                //alert(mediaRecorder);
+                //$('#videodivwrap').hide('slow');
+            }, 60000);
 
             navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
 
+            var options = {
+                type: 'video'
+            };
+
+
+
             function onMediaSuccess(stream) {
-                var mediaRecorder = new MediaStreamRecorder(stream);
-                mediaRecorder.mimeType = 'video/webm';
+
                 var video=$('#videodivwrap').find('video')[0];
                 video.src=URL.createObjectURL(stream);
                 video.play();
 
+                var callback=function(){
+                    videoRecorder = RecordRTC(stream,options);
+                    audioRecorder = RecordRTC(stream);
+                    videoRecorder.startRecording();
+                    audioRecorder.startRecording();
+                    $timeout(function () {
+                        audioRecorder.stopRecording(function() {
+                            videoRecorder.stopRecording(function(){
+                                //alert(last);
+                                socket.emit('stream', {'last':last,
+                                    'vdata':videoRecorder.getBlob(),
+                                    'adata':audioRecorder.getBlob()
+                                });
+                                callback();
+                            })
+                            //mediaElement.src = videoURL; //plays the recorded blob url on that src
+
+
+                        });
+                    }, 10000);
+
+                }
+                callback()
+
+
+
+
+                /*mediaRecorder = new MediaStreamRecorder (stream);
+                mediaRecorder.mimeType = 'video/webm';
+                /!*mediaRecorder.width = 320;
+                mediaRecorder.height = 240;*!/
+
+
                 mediaRecorder.ondataavailable = function (blob) {
                     // POST/PUT "Blob" using FormData/XHR2
-                    var blobURL = URL.createObjectURL(blob);
-                    console.log(blobURL);
+                    //var blobURL = URL.createObjectURL(blob);
+                    //console.log(blobURL);
+                    socket.emit('stream', {'last':last,'data':blob});
+                }
+                mediaRecorder.start(10000);*/
 
-                    //document.write('<a href="' + blobURL + '">' + blobURL + '</a>');
-                };
-                mediaRecorder.start(3000);
             }
 
             function onMediaError(e) {
