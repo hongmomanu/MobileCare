@@ -1,6 +1,6 @@
 angular.module('main.newcarecontroller', [])
 
-    .controller('NewCareCtrl', function ($scope, $ionicModal, $timeout, $state, $ionicPopup) {
+    .controller('NewCareCtrl', function ($scope, $ionicModal, $timeout, $state, $ionicPopup,$rootScope) {
 
         $scope.newcarenocardnext = function (user) {
 
@@ -18,6 +18,7 @@ angular.module('main.newcarecontroller', [])
 
         $scope.demo = 'nocard';
         $scope.newCare = function (p) {
+            $rootScope.$broadcast('startrecording');
             document.body.classList.remove('platform-card');
             document.body.classList.remove('platform-nocard');
             document.body.classList.add('platform-' + p);

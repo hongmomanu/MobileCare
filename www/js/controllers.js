@@ -78,6 +78,46 @@ angular.module('starter.controllers', [])
             {title: 'Cowbell', id: 6}
         ];
     })
+    .controller('videoCtrl', function ($scope,$rootScope) {
+        console.log('videoCtrl');
+        $rootScope.$on('startrecording', function (event) {
+            console.log('startrecording');
+            $('#videodivwrap').show('slow');
+
+            //video.src="img/movie.ogg";
+            //video.play();
+
+            var mediaConstraints = {
+                audio: true, // don't forget audio!
+                video: true                         // don't forget video!
+            };
+
+            navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
+
+            function onMediaSuccess(stream) {
+                var mediaRecorder = new MediaStreamRecorder(stream);
+                mediaRecorder.mimeType = 'video/webm';
+                var video=$('#videodivwrap').find('video')[0];
+                video.src=URL.createObjectURL(stream);
+                video.play();
+
+                mediaRecorder.ondataavailable = function (blob) {
+                    // POST/PUT "Blob" using FormData/XHR2
+                    var blobURL = URL.createObjectURL(blob);
+                    console.log(blobURL);
+
+                    //document.write('<a href="' + blobURL + '">' + blobURL + '</a>');
+                };
+                mediaRecorder.start(3000);
+            }
+
+            function onMediaError(e) {
+                console.error('media error', e);
+            }
+
+        });
+
+    })
 
     .controller('PlaylistCtrl', function ($scope, $stateParams, $http) {
 
