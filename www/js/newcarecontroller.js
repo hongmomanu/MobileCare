@@ -19,6 +19,9 @@ angular.module('main.newcarecontroller', [])
         $scope.demo = 'nocard';
         $scope.newCare = function (p) {
             $rootScope.$broadcast('startrecording');
+            /*$timeout(function(){
+                $rootScope.$broadcast('stoprecording');
+            },60000);*/
             document.body.classList.remove('platform-card');
             document.body.classList.remove('platform-nocard');
             document.body.classList.add('platform-' + p);
@@ -46,8 +49,7 @@ angular.module('main.newcarecontroller', [])
     })
     .controller('CaretemplistCtrl', function ($scope, $stateParams, $http, $ionicLoading, tempService, $rootScope) {
 
-        testobj = $http;
-        console.log($stateParams);
+
         tempService.getCaretempByid($stateParams.sigleId).then(function (response) {
             $scope.devList = response.data.content;
         });
@@ -72,7 +74,7 @@ angular.module('main.newcarecontroller', [])
 
     })
 
-    .controller('CaredetailCtrl', function ($scope, $ionicModal,$stateParams, tempService, $state, $ionicPopup, $ionicLoading) {
+    .controller('CaredetailCtrl', function ($scope, $rootScope,$ionicModal,$stateParams, tempService, $state, $ionicPopup, $ionicLoading) {
 
 
         $scope.clientSideList = [
@@ -106,21 +108,35 @@ angular.module('main.newcarecontroller', [])
         };
         $scope.saverecord = function () {
 
-            var data = angular.copy($scope.savedata);
-            delete  data._id;
-            delete data.time;
-            tempService.saveRecordById($stateParams.caredetailId, data).then(function (response) {
-                if (response.data.success) {
-                    //$state.go('index.caredetails');
-                    $ionicLoading.show({template: '表单保存完毕', duration: 1500});
-                } else {
-                    var alertPopup = $ionicPopup.alert({
-                        title: '错误提示',
-                        template: '提交数据失败'
-                    });
-                }
+            $ionicPopup.confirm({
+                title: '急救档案提示',
+                template: '确定保存此次急救档案么?'
+            }).then(function(res) {
+                if(res) {
+                    $rootScope.$broadcast('stoprecording');
 
+                    var data = angular.copy($scope.savedata);
+                    delete  data._id;
+                    delete data.time;
+                    data.videosrc=videosrc;
+                    tempService.saveRecordById($stateParams.caredetailId, data).then(function (response) {
+                        if (response.data.success) {
+                            //$state.go('index.caredetails');
+                            $ionicLoading.show({template: '表单保存完毕', duration: 1500});
+                        } else {
+                            var alertPopup = $ionicPopup.alert({
+                                title: '错误提示',
+                                template: '提交数据失败'
+                            });
+                        }
+
+                    });
+
+                } else {
+                    //console.log('You are not sure');
+                }
             });
+
 
 
         };

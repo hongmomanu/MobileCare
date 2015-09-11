@@ -80,32 +80,59 @@ angular.module('starter.controllers', [])
     })
     .controller('videoCtrl', function ($scope,$rootScope,$timeout) {
         console.log('videoCtrl');
+        //var last=false;
+        var exArray = []; //存储设备源ID
+        MediaStreamTrack.getSources(function (sourceInfos) {
+            for (var i = 0; i != sourceInfos.length; ++i) {
+                var sourceInfo = sourceInfos[i];
+                //这里会遍历audio,video，所以要加以区分
+                if (sourceInfo.kind == 'video') {
+                    exArray.push(sourceInfo.id);
+                }
+            }
+
+        });
+        $rootScope.$on('stoprecording', function (event) {
+            last=true;
+        });
         $rootScope.$on('startrecording', function (event) {
+            if(!last)return;
+            last=false;
             console.log('startrecording');
             $('#videodivwrap').show('slow');
 
+
             var mediaConstraints = {
                 audio: true,
-                video: true                         // don't forget video!
+                video: {
+                    'optional': [{
+                        'sourceId': exArray[1] //0为前置摄像头，1为后置
+                    }]
+                }
+
             };
-            var socket = io(socketurl);
-            socket.on('finished', function (data) {
-                console.log(data);
-            })
-            socket.on('connected', function (data) {
-                console.log(data);
-            });
-            var last=false;
+
             var videoRecorder=null;
             var audioRecorder=null;
+            var mediaStream=null;
 
-            $timeout(function () {
+            var socket = io(socketurl);
+            socket.on('finished', function (data) {
+                if(mediaStream) mediaStream.stop();
                 last=true;
-                //mediaRecorder.stop();
-                //mediaRecorder.clearOldRecordedFrames();
-                //alert(mediaRecorder);
-                //$('#videodivwrap').hide('slow');
-            }, 60000);
+                $('#videodivwrap').hide('slow');
+            })
+            socket.on('connected', function (data) {
+                //console.log(data);
+                videosrc=data.path;
+
+            });
+
+
+            /*$timeout(function () {
+                last=true;
+
+            }, 60000);*/
 
             navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
 
@@ -113,9 +140,8 @@ angular.module('starter.controllers', [])
                 type: 'video'
             };
 
-
-
             function onMediaSuccess(stream) {
+                mediaStream=stream
 
                 var video=$('#videodivwrap').find('video')[0];
                 video.src=URL.createObjectURL(stream);
@@ -134,7 +160,7 @@ angular.module('starter.controllers', [])
                                     'vdata':videoRecorder.getBlob(),
                                     'adata':audioRecorder.getBlob()
                                 });
-                                callback();
+                                if(!last)callback();
                             })
                             //mediaElement.src = videoURL; //plays the recorded blob url on that src
 
@@ -143,24 +169,9 @@ angular.module('starter.controllers', [])
                     }, 10000);
 
                 }
-                callback()
+                callback();
 
 
-
-
-                /*mediaRecorder = new MediaStreamRecorder (stream);
-                mediaRecorder.mimeType = 'video/webm';
-                /!*mediaRecorder.width = 320;
-                mediaRecorder.height = 240;*!/
-
-
-                mediaRecorder.ondataavailable = function (blob) {
-                    // POST/PUT "Blob" using FormData/XHR2
-                    //var blobURL = URL.createObjectURL(blob);
-                    //console.log(blobURL);
-                    socket.emit('stream', {'last':last,'data':blob});
-                }
-                mediaRecorder.start(10000);*/
 
             }
 
