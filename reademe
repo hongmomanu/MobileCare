@@ -1,0 +1,2 @@
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore platforms/android/affixApp.keystore platforms/android/build/outputs/apk/android-armv7-release-unsigned.apk affixApp
+123456
