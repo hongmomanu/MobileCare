@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $state, $ionicPopup, userService) {
+    .controller('AppCtrl', function ($scope, $ionicModal,$ionicLoading, $timeout, $state, $ionicPopup, userService) {
 
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
@@ -10,7 +10,10 @@ angular.module('starter.controllers', [])
         //});
 
         // Form data for the login modal
-        $scope.user = {};
+        $scope.user = {username:localStorage.username,
+            password:localStorage.password,
+            realname:localStorage.realname
+        };
 
         // Create the login modal that we will use later
         $ionicModal.fromTemplateUrl(localStorage.serverurl+'templates/login.html', {
@@ -47,8 +50,13 @@ angular.module('starter.controllers', [])
 
         // Perform the login action when the user submits the login form
         $scope.signIn = function () {
+            $ionicLoading.show({template: '登录中...'});
             userService.userlogin($scope.user.username, $scope.user.password).then(function (response) {
+                $ionicLoading.hide();
                 if (response.data.success) {
+                    localStorage.username=response.data.user.username;
+                    localStorage.password=response.data.user.password;
+                    localStorage.realname=response.data.user.realname;
                     $state.go('index.search');
                 } else {
                     var alertPopup = $ionicPopup.alert({
@@ -63,21 +71,13 @@ angular.module('starter.controllers', [])
 
 
         };
+        $scope.signIn();
 
 
     })
 
 
-    .controller('PlaylistsCtrl', function ($scope) {
-        $scope.playlists = [
-            {title: 'Reggae', id: 1},
-            {title: 'Chill', id: 2},
-            {title: 'Dubstep', id: 3},
-            {title: 'Indie', id: 4},
-            {title: 'Rap', id: 5},
-            {title: 'Cowbell', id: 6}
-        ];
-    })
+
     .controller('videoCtrl', function ($scope,$rootScope,$timeout) {
         console.log('videoCtrl');
         //var last=false;
@@ -104,6 +104,7 @@ angular.module('starter.controllers', [])
 
             var mediaConstraints = {
                 audio: true,
+                //video: true
                 video: {
                     'optional': [{
                         'sourceId': exArray[1] //0为前置摄像头，1为后置
@@ -145,6 +146,7 @@ angular.module('starter.controllers', [])
 
                 var video=$('#videodivwrap').find('video')[0];
                 video.src=URL.createObjectURL(stream);
+                //alert(video);
                 video.play();
 
                 var callback=function(){
@@ -158,6 +160,7 @@ angular.module('starter.controllers', [])
                                 //alert(last);
                                 socket.emit('stream', {'last':last,
                                     'vdata':videoRecorder.getBlob(),
+                                    'realname':localStorage.realname,
                                     'adata':audioRecorder.getBlob()
                                 });
                                 if(!last)callback();

@@ -119,6 +119,7 @@ angular.module('main.newcarecontroller', [])
                     delete  data._id;
                     delete data.time;
                     data.videosrc=videosrc;
+
                     tempService.saveRecordById($stateParams.caredetailId, data).then(function (response) {
                         if (response.data.success) {
                             //$state.go('index.caredetails');

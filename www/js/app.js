@@ -42,7 +42,7 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
     abstract: true,
     //templateUrl: 'templates/menu.html',
     templateUrl: localStorage.serverurl+'templates/menu.html?t='+(new Date().getTime()),
-    controller: 'AppCtrl'
+    controller: 'NewCareCtrl'
   })
 
 
