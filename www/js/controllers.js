@@ -13,7 +13,7 @@ angular.module('starter.controllers', [])
         $scope.user = {};
 
         // Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl('templates/login.html', {
+        $ionicModal.fromTemplateUrl(localStorage.serverurl+'templates/login.html', {
             scope: $scope
         }).then(function (modal) {
             $scope.modal = modal;

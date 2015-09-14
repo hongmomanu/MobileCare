@@ -30,7 +30,8 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
       $stateProvider
       .state('app', {
         url: '/login',
-        templateUrl: 'templates/login.html',
+        //templateUrl: 'templates/login.html',
+        templateUrl: localStorage.serverurl+'templates/login.html?t='+(new Date().getTime()),
         controller: 'AppCtrl'
       })
 
@@ -39,7 +40,8 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
     .state('index', {
     url: '/index',
     abstract: true,
-    templateUrl: 'templates/menu.html',
+    //templateUrl: 'templates/menu.html',
+    templateUrl: localStorage.serverurl+'templates/menu.html?t='+(new Date().getTime()),
     controller: 'AppCtrl'
   })
 
@@ -49,7 +51,8 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
     url: '/search',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        //templateUrl: 'templates/search.html'
+        templateUrl: localStorage.serverurl+'templates/search.html?t='+(new Date().getTime()),
       }
     }
   })
@@ -59,7 +62,8 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
     url: '/newcare',
     views: {
       'menuContent': {
-        templateUrl: 'templates/newcare.html',
+        //templateUrl: 'templates/newcare.html',
+        templateUrl: localStorage.serverurl+'templates/newcare.html?t='+(new Date().getTime()),
         controller: 'NewCareCtrl'
       }
     }
@@ -68,7 +72,8 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
     url: '/newcareunknwon',
     views: {
       'menuContent': {
-        templateUrl: 'templates/newcareunknwon.html',
+        //templateUrl: 'templates/newcareunknwon.html',
+        templateUrl: localStorage.serverurl+'templates/newcareunknwon.html?t='+(new Date().getTime()),
         controller: 'NewCareCtrl'
       }
     }
@@ -77,7 +82,8 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
     url: '/newcarewithcard',
     views: {
       'menuContent': {
-        templateUrl: 'templates/newcarewithcard.html',
+        //templateUrl: 'templates/newcarewithcard.html',
+        templateUrl: localStorage.serverurl+'templates/newcarewithcard.html?t='+(new Date().getTime()),
         controller: 'NewCareCtrl'
       }
     }
@@ -87,7 +93,8 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
     url: '/selecttemp/:username:cardno',
     views: {
       'menuContent': {
-        templateUrl: 'templates/choosetemp.html',
+        //templateUrl: 'templates/choosetemp.html',
+        templateUrl: localStorage.serverurl+'templates/choosetemp.html?t='+(new Date().getTime()),
         /*params: ['user'],*/
         controller: 'ChooseTempCtrl'
       }
@@ -98,7 +105,8 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
       url: '/choosetemp/:sigleId',
       views: {
         'menuContent': {
-          templateUrl: 'templates/caretemplist.html',
+          //templateUrl: 'templates/caretemplist.html',
+          templateUrl: localStorage.serverurl+'templates/caretemplist.html?t='+(new Date().getTime()),
           controller: 'CaretemplistCtrl'
         }
       }
@@ -108,7 +116,8 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
       url: '/browse',
       views: {
         'menuContent': {
-          templateUrl: 'templates/browse.html'
+          //templateUrl: 'templates/browse.html'
+          templateUrl: localStorage.serverurl+'templates/browse.html?t='+(new Date().getTime())
         }
       }
     })
@@ -116,7 +125,8 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
       url: '/playlists',
       views: {
         'menuContent': {
-          templateUrl: 'templates/playlists.html',
+          //templateUrl: 'templates/playlists.html',
+          templateUrl: localStorage.serverurl+'templates/playlists.html?t='+(new Date().getTime()),
           controller: 'PlaylistsCtrl'
         }
       }
@@ -125,7 +135,8 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
       url: '/caredetails',
       views: {
         'menuContent': {
-          templateUrl: 'templates/caredetails.html',
+          //templateUrl: 'templates/caredetails.html',
+          templateUrl: localStorage.serverurl+'templates/caredetails.html?t='+(new Date().getTime()),
           controller: 'CaredetailsCtrl'
         }
       }
@@ -133,7 +144,8 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
             url: '/caredetails/:caredetailId',
             views: {
               'menuContent': {
-                templateUrl: 'templates/caredetail.html',
+                //templateUrl: 'templates/caredetail.html',
+                templateUrl: localStorage.serverurl+'templates/caredetail.html?t='+(new Date().getTime()),
                 controller: 'CaredetailCtrl'
               }
             }
@@ -143,7 +155,8 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
     url: '/playlists/:playlistId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/playlist.html',
+        //templateUrl: 'templates/playlist.html',
+        templateUrl: localStorage.serverurl+'templates/playlist.html?t='+(new Date().getTime()),
         controller: 'PlaylistCtrl'
       }
     }

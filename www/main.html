@@ -5,8 +5,15 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <!--<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">-->
+
+    <script type="text/javascript">
+      document.write('<link rel="stylesheet" href="'+localStorage.serverurl+ 'lib/ionic/css/ionic.css?t='+
+      new Date().getTime()+'">');
+      document.write('<link rel="stylesheet" href="'+localStorage.serverurl+ 'css/style.css?t='+
+      new Date().getTime()+'">');
+    </script>
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -19,7 +26,37 @@
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
-    <script src="js/app.js"></script>
+
+    <script type="text/javascript">
+      document.write('<script src="'+localStorage.serverurl+ 'js/app.js?t='+
+      new Date().getTime()+'"></scr'+'ipt>');
+      document.write('<script src="'+localStorage.serverurl+ 'js/controllers.js?t='+
+      new Date().getTime()+'"></scr'+'ipt>');
+      document.write('<script src="'+localStorage.serverurl+ 'js/newcarecontroller.js?t='+
+      new Date().getTime()+'"></scr'+'ipt>');
+      document.write('<script src="'+localStorage.serverurl+ 'js/services/mainService.js?t='+
+      new Date().getTime()+'"></scr'+'ipt>');
+      document.write('<script src="'+localStorage.serverurl+ 'js/services/userService.js?t='+
+      new Date().getTime()+'"></scr'+'ipt>');
+      document.write('<script src="'+localStorage.serverurl+ 'js/services/tempService.js?t='+
+      new Date().getTime()+'"></scr'+'ipt>');
+      document.write('<script src="'+localStorage.serverurl+ 'js/MediaStreamRecorder.js?t='+
+      new Date().getTime()+'"></scr'+'ipt>');
+      document.write('<script src="'+localStorage.serverurl+ 'js/RecordRTC.js?t='+
+      new Date().getTime()+'"></scr'+'ipt>');
+      document.write('<script src="'+localStorage.serverurl+ 'js/socket.io-1.3.5.js?t='+
+      new Date().getTime()+'"></scr'+'ipt>');
+      document.write('<script src="'+localStorage.serverurl+ 'js/firebase.js?t='+
+      new Date().getTime()+'"></scr'+'ipt>');
+      document.write('<script src="'+localStorage.serverurl+ 'js/RTCPeerConnection-v1.5.js?t='+
+      new Date().getTime()+'"></scr'+'ipt>');
+      document.write('<script src="'+localStorage.serverurl+ 'js/broadcast.js?t='+
+      new Date().getTime()+'"></scr'+'ipt>');
+      document.write('<script src="'+localStorage.serverurl+ 'js/DetectRTC.js?t='+
+      new Date().getTime()+'"></scr'+'ipt>');
+    </script>
+
+    <!--<script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/newcarecontroller.js"></script>
     <script src="js/services/mainService.js"></script>
@@ -27,7 +64,8 @@
     <script src="js/services/tempService.js"></script>
     <script src="js/MediaStreamRecorder.js"></script>
     <script src="js/RecordRTC.js"></script>
-    <script src="js/socket.io-1.3.5.js"></script>
+    <script src="js/socket.io-1.3.5.js"></script>-->
+
     <script src="js/jquery.min.js"></script>
   </head>
 

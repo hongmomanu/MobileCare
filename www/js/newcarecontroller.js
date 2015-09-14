@@ -93,7 +93,7 @@ angular.module('main.newcarecontroller', [])
 
         $scope.playvideo = function () {
             //alert(11);
-            $ionicModal.fromTemplateUrl('templates/videomodel.html', {
+            $ionicModal.fromTemplateUrl(localStorage.serverurl+'templates/videomodel.html', {
                 scope: $scope
             }).then(function (modal) {
                 $scope.videomodal = modal;
