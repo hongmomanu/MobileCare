@@ -6,6 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 var serverurl="http://192.168.2.100:3000/";
 var socketurl="http://192.168.2.100:8001";
+var broadcasturl="http://192.168.2.100:8888/";
 var videosrc="";
 var last=true;
 angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontroller','app.services'])
