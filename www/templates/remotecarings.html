@@ -1,7 +1,7 @@
-<ion-view view-title="进行中">
+<ion-view view-title="正在进行中的急诊">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="remotecaring in remotecarings" href="#/index/remotecaring/{{remotecaring.username}}">
+      <ion-item ng-repeat="remotecaring in remotecarings" href="#/index/remotecarings/{{remotecaring.username}}:{{remotecaring.realname}}">
         {{remotecaring.realname}}
       </ion-item>
     </ion-list>

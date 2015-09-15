@@ -163,7 +163,7 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
     }
   })
    .state('index.remotecaring', {
-    url: '/remotecarings/:remotecaringId',
+    url: '/remotecarings/:username:realname',
     views: {
       'menuContent': {
         templateUrl: localStorage.serverurl+'templates/remotecaring.html?t='+(new Date().getTime()),

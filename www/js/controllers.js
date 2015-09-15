@@ -149,7 +149,9 @@ angular.module('starter.controllers', [])
                 //alert(video);
                 video.play();
 
-                var callback=function(){
+
+
+                var callback=function(timeno){
                     videoRecorder = RecordRTC(stream,options);
                     audioRecorder = RecordRTC(stream);
                     videoRecorder.startRecording();
@@ -163,16 +165,16 @@ angular.module('starter.controllers', [])
                                     'realname':localStorage.realname,
                                     'adata':audioRecorder.getBlob()
                                 });
-                                if(!last)callback();
+                                if(!last)callback(10000);
                             })
                             //mediaElement.src = videoURL; //plays the recorded blob url on that src
 
 
                         });
-                    }, 10000);
+                    }, timeno);
 
                 }
-                callback();
+                callback(0);
 
 
 

@@ -39,14 +39,17 @@ angular.module('main.newcarecontroller', [])
         console.log("RemotecaringsCtrl");
         broadcastService.getbroadcasters().then(function (response) {
             $scope.remotecarings = response.data;
+            console.log(response);
         });
 
     })
+
     .controller('RemotecaringCtrl', function ($scope, $stateParams, $http, $ionicLoading, tempService, $rootScope) {
         console.log("RemotecaringCtrl");
+        console.log($stateParams);
     })
     .controller('ChooseTempCtrl', function ($scope, $stateParams, $http, $ionicLoading, tempService, $rootScope) {
-        console.log($stateParams);
+        console.log("ChooseTempCtrl");
 
         $rootScope.$on('tempinit', function (event, otherscope) {
             otherscope.carerecord = $stateParams;
