@@ -291,13 +291,13 @@ function loadIceFrame(callback) {
 
 RTCPeerConnection.iceServers = [];
 
-/*RTCPeerConnection.iceServers.push({
+RTCPeerConnection.iceServers.push({
     url: 'stun:stun.l.google.com:19302'
-});*/
+});
 
-/*RTCPeerConnection.iceServers.push({
+RTCPeerConnection.iceServers.push({
     url: 'stun:stun.anyfirewall.com:3478'
-});*/
+});
 
 RTCPeerConnection.iceServers.push({
     url: 'turn:turn.bistri.com:80',
@@ -305,11 +305,11 @@ RTCPeerConnection.iceServers.push({
     username: 'homeo'
 });
 
-/*RTCPeerConnection.iceServers.push({
+RTCPeerConnection.iceServers.push({
     url: 'turn:turn.anyfirewall.com:443?transport=tcp',
     credential: 'webrtc',
     username: 'webrtc'
-});*/
+});
 
 loadIceFrame(function(servers) {
     RTCPeerConnection.iceServers = RTCPeerConnection.iceServers.concat(servers);

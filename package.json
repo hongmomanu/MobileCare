@@ -19,7 +19,11 @@
     "cordova-plugin-console",
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
-    "com.ionic.keyboard"
+    "com.ionic.keyboard",
+    "org.apache.cordova.camera",
+    "org.apache.cordova.device",
+    "org.apache.cordova.media",
+    "phonegap-plugin-barcodescanner"
   ],
   "cordovaPlatforms": [
     "android"
