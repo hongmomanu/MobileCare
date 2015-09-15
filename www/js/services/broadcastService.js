@@ -6,7 +6,7 @@ angular.module('app.services')
         return {
             getbroadcasters: function() {
 
-                return $http.get(broadcasturl+"getbroadcasters").then(function(response) {
+                return $http.get(socketurl+"getbroadcasters").then(function(response) {
                             return response;
                 });
             }
