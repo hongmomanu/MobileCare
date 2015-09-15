@@ -50,7 +50,7 @@ angular.module('starter.controllers', [])
 
         // Perform the login action when the user submits the login form
         $scope.signIn = function () {
-            $ionicLoading.show({template: '登录中...'});
+            $ionicLoading.show({template: '登录中...',duration: 5000});
             userService.userlogin($scope.user.username, $scope.user.password).then(function (response) {
                 $ionicLoading.hide();
                 if (response.data.success) {

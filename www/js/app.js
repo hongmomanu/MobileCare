@@ -121,13 +121,13 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
         }
       }
     })
-    .state('index.playlists', {
-      url: '/playlists',
+    .state('index.remotecarings', {
+      url: '/remotecarings',
       views: {
         'menuContent': {
           //templateUrl: 'templates/playlists.html',
-          templateUrl: localStorage.serverurl+'templates/playlists.html?t='+(new Date().getTime()),
-          controller: 'PlaylistsCtrl'
+          templateUrl: localStorage.serverurl+'templates/remotecarings.html?t='+(new Date().getTime()),
+          controller: 'RemotecaringsCtrl'
         }
       }
     })
@@ -158,6 +158,15 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
         //templateUrl: 'templates/playlist.html',
         templateUrl: localStorage.serverurl+'templates/playlist.html?t='+(new Date().getTime()),
         controller: 'PlaylistCtrl'
+      }
+    }
+  })
+   .state('index.remotecaring', {
+    url: '/remotecarings/:remotecaringId',
+    views: {
+      'menuContent': {
+        templateUrl: localStorage.serverurl+'templates/remotecaring.html?t='+(new Date().getTime()),
+        controller: 'RemotecaringCtrl'
       }
     }
   });

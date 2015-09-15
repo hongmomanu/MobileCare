@@ -35,6 +35,12 @@ angular.module('main.newcarecontroller', [])
 
 
     })
+    .controller('RemotecaringsCtrl', function ($scope, $stateParams, $http, $ionicLoading, tempService, $rootScope) {
+        console.log("RemotecaringsCtrl");
+    })
+    .controller('RemotecaringCtrl', function ($scope, $stateParams, $http, $ionicLoading, tempService, $rootScope) {
+        console.log("RemotecaringCtrl");
+    })
     .controller('ChooseTempCtrl', function ($scope, $stateParams, $http, $ionicLoading, tempService, $rootScope) {
         console.log($stateParams);
 
