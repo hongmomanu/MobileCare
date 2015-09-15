@@ -30,6 +30,7 @@ var config = {
         // http://socketio-over-nodejs.nodejitsu.com:80/
         // http://webrtc-signaling.nodejitsu.com:80/
 
+        console.log('openSocket');
         var SIGNALING_SERVER = 'http://192.168.2.100:8888/';
 
         config.channel = config.channel || location.href.replace(/\/|:|#|%|\.|\[|\]/g, '');
