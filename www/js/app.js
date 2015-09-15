@@ -133,7 +133,8 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
       }
     })
       .state('index.caredetails', {
-      url: '/caredetails',
+      url: '/caredetails?t='+(new Date().getTime()),
+      cache:false,
       views: {
         'menuContent': {
           //templateUrl: 'templates/caredetails.html',
@@ -163,7 +164,7 @@ angular.module('starter', ['ionic', 'starter.controllers','main.newcarecontrolle
     }
   })
    .state('index.remotecaring', {
-    url: '/remotecarings/:username:realname',
+    url: '/remotecarings/:username/:realname',
     views: {
       'menuContent': {
         templateUrl: localStorage.serverurl+'templates/remotecaring.html?t='+(new Date().getTime()),

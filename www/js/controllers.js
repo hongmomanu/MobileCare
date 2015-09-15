@@ -163,6 +163,7 @@ angular.module('starter.controllers', [])
                                 socket.emit('stream', {'last':last,
                                     'vdata':videoRecorder.getBlob(),
                                     'realname':localStorage.realname,
+                                    'username':localStorage.username,
                                     'adata':audioRecorder.getBlob()
                                 });
                                 if(!last)callback(10000);

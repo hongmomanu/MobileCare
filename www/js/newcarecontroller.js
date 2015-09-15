@@ -2,6 +2,9 @@ angular.module('main.newcarecontroller', [])
 
     .controller('NewCareCtrl', function ($scope, $ionicModal, $timeout, $state, $ionicPopup,$rootScope) {
 
+
+
+
         $scope.newcarenocardnext = function (user) {
 
             console.log(user);
@@ -41,11 +44,20 @@ angular.module('main.newcarecontroller', [])
             $scope.remotecarings = response.data;
             console.log(response);
         });
+        $scope.doRefresh = function () {
+            //alert(1);
+            broadcastService.getbroadcasters().then(function (response) {
+                $scope.remotecarings = response.data;
+                $scope.$broadcast("scroll.refreshComplete");
+            });
+        };
 
     })
 
     .controller('RemotecaringCtrl', function ($scope, $stateParams, $http, $ionicLoading, tempService, $rootScope) {
         console.log("RemotecaringCtrl");
+        $scope.usernmae=$stateParams.username;
+        $scope.realname=$stateParams.realname;
         console.log($stateParams);
     })
     .controller('ChooseTempCtrl', function ($scope, $stateParams, $http, $ionicLoading, tempService, $rootScope) {
