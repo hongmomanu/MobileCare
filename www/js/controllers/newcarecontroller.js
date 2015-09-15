@@ -58,9 +58,16 @@ angular.module('app.controllers')
         console.log("RemotecaringCtrl");
         $scope.usernmae=$stateParams.username;
         $scope.realname=$stateParams.realname;
-        var participants = document.getElementById("videodivwrap");
-        $('#remotecaringvideo')[0].src=participants.children[0].src;
-        //$scope.videosrc=participants.children[0].src;
+
+        $rootScope.$broadcast('joinroomclick',$stateParams.username);
+        /*var participants = document.getElementById("videodivwrap");
+        $('#remotecaringvideo')[0].src=participants.children[0].src;*/
+
+        $scope.$on('$ionicView.leave', function(){
+            console.log("hahaha");
+            $rootScope.$broadcast('remoteleaved');
+            // do all kind of stuff
+        });
         console.log($stateParams);
     })
     .controller('ChooseTempCtrl', function ($scope, $stateParams, $http, $ionicLoading, tempService, $rootScope) {

@@ -133,7 +133,7 @@ angular.module('starter', ['ionic', 'app.controllers','app.services'])
       }
     })
       .state('index.caredetails', {
-      url: '/caredetails?t='+(new Date().getTime()),
+      url: '/caredetails',
       cache:false,
       views: {
         'menuContent': {
