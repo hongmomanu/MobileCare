@@ -30,18 +30,18 @@ var config = {
         // http://socketio-over-nodejs.nodejitsu.com:80/
         // http://webrtc-signaling.nodejitsu.com:80/
 
-        console.log('openSocket');
+        console.log('openSocket')
         var SIGNALING_SERVER = 'http://192.168.2.100:8888/';
 
         config.channel = config.channel || location.href.replace(/\/|:|#|%|\.|\[|\]/g, '');
         var sender = Math.round(Math.random() * 999999999) + 999999999;
 
-        io.connect(SIGNALING_SERVER).emit('new-channel', {
+        ioold.connect(SIGNALING_SERVER).emit('new-channel', {
             channel: config.channel,
             sender: sender
         });
 
-        var socket = io.connect(SIGNALING_SERVER + config.channel);
+        var socket = ioold.connect(SIGNALING_SERVER + config.channel);
         socket.channel = config.channel;
         socket.on('connect', function () {
             if (config.callback) config.callback(socket);
