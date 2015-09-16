@@ -162,6 +162,14 @@ angular.module('app.controllers')
 
             getUserMedia({
                 video: video,
+                constraints :{
+                    audio: true,
+                    video: {
+                        'optional': [{
+                            'sourceId': exArray[1] //0为前置摄像头，1为后置
+                        }]
+                    }
+                },
                 onsuccess: function(stream) {
                     config.attachStream = stream;
                     callback && callback();
@@ -298,7 +306,7 @@ angular.module('app.controllers')
             function onMediaSuccess(stream) {
                 mediaStream=stream
 
-                var video=$('#videodivwrap').find('video')[0];
+                var video=$('#videodiv')[0];
                 video.src=URL.createObjectURL(stream);
                 //alert(video);
                 video.play();
