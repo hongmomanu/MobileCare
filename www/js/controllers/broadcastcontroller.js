@@ -6,88 +6,117 @@ angular.module('app.controllers')
         var exArray = []; //存储设备源ID
 
 
-        var config = {
-            openSocket: function(config) {
 
 
-                console.log('openSocket')
-                var SIGNALING_SERVER = broadcasturl;
 
-                config.channel = config.channel || location.href.replace(/\/|:|#|%|\.|\[|\]/g, '');
-                var sender = Math.round(Math.random() * 999999999) + 999999999;
+        var participants = document.getElementById("videodivwrap");
+        //var startConferencing = document.getElementById('start-conferencing');
+        var roomsList = document.getElementById('rooms-list');
+        var config=null;
+        var broadcastUI=null;
 
-                ioold.connect(SIGNALING_SERVER).emit('new-channel', {
-                    channel: config.channel,
-                    sender: sender
-                });
 
-                var socket = ioold.connect(SIGNALING_SERVER + config.channel);
-                socket.channel = config.channel;
-                socket.on('connect', function () {
-                    if (config.callback) config.callback(socket);
-                });
 
-                socket.send = function (message) {
-                    socket.emit('message', {
-                        sender: sender,
-                        data: message
+        //var socket=null;
+
+        var makebroadconfig=function(isnew){
+             config = {
+                openSocket: function(config) {
+
+
+                    console.log('openSocket init channel');
+
+                    var SIGNALING_SERVER = broadcasturl;
+
+                    config.channel = config.channel || 'mainchannel'; //location.href.replace(/\/|:|#|%|\.|\[|\]/g, '');
+                    //config.channel = (new Date()).getTime();
+                    console.log(config.channel);
+                    var sender = Math.round(Math.random() * 999999999) + 999999999;
+
+                    var newsocket=ioold.connect(SIGNALING_SERVER, {
+                         'force new connection': isnew
+
+                     }).emit('new-channel', {
+                        channel: config.channel,
+                        sender: sender
                     });
-                };
-
-                socket.on('message', config.onmessage);
 
 
-            },
-            onRemoteStream: function(media) {
-                var video = media.video;
-                config.remotevideo=media;
-                console.log("remote");
-                //console.log(video);
-                console.log(media);
-                video.setAttribute('controls', true);
+                    var socket=ioold.connect(SIGNALING_SERVER + config.channel, {
+                        'force new connection': isnew
+                    });
 
-                if(participants.childElementCount>0)video.style.display='none';
-                //alert()
-                participants.insertBefore(video, participants.firstChild);
-                //$(video).hide();
-                testobj=participants;
-                console.log(participants);
 
-                video.play();
-                if($('#remotecaringvideo').length>0)$('#remotecaringvideo')[0].src=video.src;
-                //rotateVideo(video);
-            },
-            onRoomFound: function(room) {
+                    socket.channel = config.channel;
 
-                //alert(111);
-                //console.log(room);
-                var alreadyExist = document.getElementById(room.broadcaster);
-                if (alreadyExist) return;
 
-                if (typeof roomsList === 'undefined') roomsList = document.body;
+                    socket.on('connect', function () {
+                        console.log('socketconnect')
+                        if (config.callback) config.callback(socket);
+                    });
 
-                var tr = document.createElement('tr');
-                tr.setAttribute('id', room.broadcaster);
-                tr.setAttribute('trname', room.roomName);
-                tr.innerHTML = '<td>' + room.roomName + '</td>' +
-                '<td><button class="join" id="' + room.roomToken + '">Join Room</button></td>';
-                roomsList.insertBefore(tr, roomsList.firstChild);
-
-                tr.onclick = function() {
-                    tr = this;
-                    console.log('click');
-                    //captureUserMedia(function() {
-                    captureUserMediaWithOutView(function() {
-                        broadcastUI.joinRoom({
-                            roomToken: tr.querySelector('.join').id,
-                            joinUser: tr.id
+                    console.log(4444444)
+                    socket.send = function (message) {
+                        socket.emit('message', {
+                            sender: sender,
+                            data: message
                         });
+                    };
 
-                    });
-                    hideUnnecessaryStuff();
-                };
-            }
+                    socket.on('message', config.onmessage);
+
+
+                },
+                onRemoteStream: function(media) {
+                    var video = media.video;
+                    config.remotevideo=media.stream;
+                    console.log("remote");
+                    //console.log(video);
+                    console.log(media);
+                    video.setAttribute('controls', true);
+
+                    if(participants.childElementCount>0)video.style.display='none';
+                    //alert()
+                    participants.insertBefore(video, participants.firstChild);
+                    //$(video).hide();
+                    testobj=participants;
+                    console.log(participants);
+
+                    video.play();
+                    if($('#remotecaringvideo').length>0)$('#remotecaringvideo')[0].src=video.src;
+                    //rotateVideo(video);
+                },
+                onRoomFound: function(room) {
+
+                    //alert(111);
+                    //console.log(room);
+                    var alreadyExist = document.getElementById(room.broadcaster);
+                    if (alreadyExist) return;
+
+                    if (typeof roomsList === 'undefined') roomsList = document.body;
+
+                    var tr = document.createElement('tr');
+                    tr.setAttribute('id', room.broadcaster);
+                    tr.setAttribute('trname', room.roomName);
+                    tr.innerHTML = '<td>' + room.roomName + '</td>' +
+                    '<td><button class="join" id="' + room.roomToken + '">Join Room</button></td>';
+                    roomsList.insertBefore(tr, roomsList.firstChild);
+
+                    tr.onclick = function() {
+                        tr = this;
+                        //alert("111");
+                        console.log('click');
+                        $rootScope.$broadcast('roomclick',tr);
+                        //captureUserMedia(function() {
+
+                    };
+                }
+            };
+            return config
         };
+
+        makebroadconfig(false);
+
 
         function createButtonClickHandler(name) {
             captureUserMedia(function() {
@@ -148,12 +177,11 @@ angular.module('app.controllers')
         }
 
         /* on page load: get public rooms */
-        var broadcastUI = broadcast(config);
+
+        broadcastUI = broadcast(config);
 
         /* UI specific */
-        var participants = document.getElementById("videodivwrap") || document.body;
-        //var startConferencing = document.getElementById('start-conferencing');
-        var roomsList = document.getElementById('rooms-list');
+
 
         //if (startConferencing) startConferencing.onclick = createButtonClickHandler;
 
@@ -173,12 +201,12 @@ angular.module('app.controllers')
             }, 1000);
         }
 
-        (function() {
+        /*(function() {
             var uniqueToken = document.getElementById('unique-token');
             if (uniqueToken)
                 if (location.hash.length > 2) uniqueToken.parentNode.parentNode.parentNode.innerHTML = '<h2 style="text-align:center;"><a href="' + location.href + '" target="_blank">Share this link</a></h2>';
                 else uniqueToken.innerHTML = uniqueToken.parentNode.parentNode.href = '#' + (Math.random() * new Date().getTime()).toString(36).toUpperCase().replace( /\./g , '-');
-        })();
+        })();*/
 
         $rootScope.$on('joinroomclick', function (event, username) {
 
@@ -187,10 +215,22 @@ angular.module('app.controllers')
             $(roomsList).find('tr[trname$="'+username+'"]').click();
 
         });
+        $rootScope.$on('roomclick', function (event,tr) {
+
+            captureUserMediaWithOutView(function() {
+                broadcastUI.joinRoom({
+                    roomToken: tr.querySelector('.join').id,
+                    joinUser: tr.id
+                });
+
+            });
+            hideUnnecessaryStuff();
+
+        });
         $rootScope.$on('remoteleaved', function (event) {
 
-            //config.remotevideo.stop();
-            config.attachStream.stop();
+
+            window.location.reload();
 
         });
 

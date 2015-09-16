@@ -15,6 +15,7 @@ var broadcast = function(config) {
         defaultSocket = { };
 
     function openDefaultSocket() {
+        console.log('openDefaultSocketopenDefaultSocket');
         defaultSocket = config.openSocket({
             onmessage: onDefaultSocketResponse,
             callback: function(socket) {
@@ -39,6 +40,7 @@ var broadcast = function(config) {
     }
 
     function openSubSocket(_config) {
+
         if (!_config.channel) return;
         var socketConfig = {
             channel: _config.channel,
@@ -209,6 +211,9 @@ var broadcast = function(config) {
             isbroadcaster = true;
             isGetNewRoom = false;
             startBroadcasting();
+        },
+        closeDefaultSocket:function(){
+
         },
         joinRoom: function(_config) {
             self.roomToken = _config.roomToken;
