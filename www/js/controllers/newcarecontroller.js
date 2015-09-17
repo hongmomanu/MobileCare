@@ -59,9 +59,11 @@ angular.module('app.controllers')
     })
     .controller('RemotecaringsCtrl', function ($scope, $stateParams, $http, $ionicLoading, broadcastService, $rootScope) {
         console.log("RemotecaringsCtrl");
+        $ionicLoading.show({template: '加载最新急救', duration: 10000});
         broadcastService.getbroadcasters().then(function (response) {
+            if(response.data.length==0||document.getElementById('rooms-list').childElementCount>0)$ionicLoading.hide();
             $scope.remotecarings = response.data;
-            console.log(response);
+
         });
         $scope.doRefresh = function () {
             //alert(1);

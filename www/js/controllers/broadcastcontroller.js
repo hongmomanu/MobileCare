@@ -70,9 +70,7 @@ angular.module('app.controllers')
                 onRemoteStream: function(media) {
                     var video = media.video;
                     config.remotevideo=media.stream;
-                    console.log("remote");
-                    //console.log(video);
-                    console.log(media);
+
                     video.setAttribute('controls', true);
 
                     if(participants.childElementCount>0)video.style.display='none';
@@ -90,6 +88,7 @@ angular.module('app.controllers')
 
                     //alert(111);
                     //console.log(room);
+                    $ionicLoading.hide();
                     var alreadyExist = document.getElementById(room.broadcaster);
                     if (alreadyExist) return;
 
@@ -104,8 +103,7 @@ angular.module('app.controllers')
 
                     tr.onclick = function() {
                         tr = this;
-                        //alert("111");
-                        console.log('click');
+
                         $rootScope.$broadcast('roomclick',tr);
                         //captureUserMedia(function() {
 
@@ -146,7 +144,7 @@ angular.module('app.controllers')
                      rotateVideo(video);*/
                 },
                 onerror: function() {
-                    alert('unable to get access to your webcam.');
+                    alert('你的设备没有摄像头.');
                     callback && callback();
                 }
             });
@@ -188,10 +186,7 @@ angular.module('app.controllers')
 
         broadcastUI = broadcast(config);
 
-        /* UI specific */
 
-
-        //if (startConferencing) startConferencing.onclick = createButtonClickHandler;
 
 
         function hideUnnecessaryStuff() {
