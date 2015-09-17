@@ -130,7 +130,7 @@ angular.module('app.controllers')
 
     })
 
-    .controller('CaredetailCtrl', function ($scope, $rootScope,$ionicModal,$stateParams, tempService, $state, $ionicPopup, $ionicLoading) {
+    .controller('CaredetailCtrl', function ($sce,$scope, $rootScope,$ionicModal,$stateParams, tempService, $state, $ionicPopup, $ionicLoading) {
 
 
         $scope.clientSideList = [
@@ -147,18 +147,30 @@ angular.module('app.controllers')
 
         //testobj=$http;
 
-        $scope.playvideo = function () {
+        $scope.playvideosrc="";
+        $scope.trustSrc = function(src) {
+            return $sce.trustAsResourceUrl(socketurl+src+'/web.webm');
+        }
+
+        $scope.playvideo = function (url) {
             //alert(11);
-            $ionicModal.fromTemplateUrl(localStorage.serverurl+'templates/videomodel.html', {
-                scope: $scope
-            }).then(function (modal) {
-                $scope.videomodal = modal;
+            $scope.playvideosrc=url;
+            if(!$scope.videomodal){
+                $ionicModal.fromTemplateUrl(localStorage.serverurl+'templates/videomodel.html', {
+                    scope: $scope
+                }).then(function (modal) {
+                    $scope.videomodal = modal;
+                    $scope.videomodal.show();
+                });
+            }else{
                 $scope.videomodal.show();
-            });
+            }
+
 
         };
         $scope.closemodel = function () {
 
+            $('#recordingvideo')[0].pause();
             $scope.videomodal.hide();
 
         };

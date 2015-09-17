@@ -1,6 +1,6 @@
 angular.module('app.controllers')
 
-    .controller('videoCtrl', function ($scope,$rootScope,$timeout) {
+    .controller('videoCtrl', function ($scope,$rootScope,$timeout,$ionicLoading ) {
         console.log('videoCtrl');
         //var last=false;
         var exArray = []; //存储设备源ID
