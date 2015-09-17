@@ -3,6 +3,25 @@ angular.module('app.controllers')
     .controller('NewCareCtrl', function ($scope, $ionicModal, $timeout, $state, $ionicPopup,$rootScope) {
 
 
+        $scope.logout = function () {
+            //$scope.modal.show();
+            //alert(1);
+
+            var confirmPopup = $ionicPopup.confirm({
+                title: '提示',
+                template: '你确定要退出应用么?'
+            });
+            confirmPopup.then(function (res) {
+                if (res) {
+                    //console.log('You are sure');
+                    $state.go('app');
+                } else {
+                    //console.log('You are not sure');
+                }
+            });
+
+
+        };
 
 
         $scope.newcarenocardnext = function (user) {

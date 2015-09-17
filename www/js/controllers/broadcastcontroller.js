@@ -285,7 +285,7 @@ angular.module('app.controllers')
 
             var socket = io.connect(socketurl);
             socket.on('finished', function (data) {
-                if(mediaStream) mediaStream.stop();
+                //if(mediaStream) mediaStream.stop();
                 last=true;
                 $('#videodivwrap').hide('slow');
             })
