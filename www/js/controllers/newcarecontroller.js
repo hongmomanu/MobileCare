@@ -213,8 +213,7 @@ angular.module('app.controllers')
                     if ($scope.newCareForm.$valid) {
                         //$scope.finalSubmit();
                         //alert(1)
-                        console.log($scope.devList);
-                        console.log($scope.carerecord);
+
                         $ionicLoading.show({template: '数据提交中...'});
                         $scope.carerecord['tempcontent'] = $scope.devList;
                         $scope.carerecord['caredetail'] = {};
