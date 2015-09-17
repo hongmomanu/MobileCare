@@ -5,10 +5,6 @@ angular.module('app.controllers')
         //var last=false;
         var exArray = []; //存储设备源ID
 
-
-
-
-
         var participants = document.getElementById("videodivwrap");
         //var startConferencing = document.getElementById('start-conferencing');
         var roomsList = document.getElementById('rooms-list');
@@ -171,7 +167,6 @@ angular.module('app.controllers')
                 onsuccess: function(stream) {
                     config.attachStream = stream;
                     callback && callback();
-
                     video.setAttribute('muted', true);
                     rotateVideo(video);
                 },
@@ -299,14 +294,13 @@ angular.module('app.controllers')
             };
 
             function onMediaSuccess(stream) {
-                mediaStream=stream
+                mediaStream=stream;
 
                 var video=$('#videodiv')[0];
                 video.src=URL.createObjectURL(stream);
+                video.setAttribute('muted', true);
                 //alert(video);
                 video.play();
-
-
 
                 var callback=function(timeno){
                     videoRecorder = RecordRTC(stream,options);
@@ -327,12 +321,11 @@ angular.module('app.controllers')
                             })
                             //mediaElement.src = videoURL; //plays the recorded blob url on that src
 
-
                         });
                     }, timeno);
 
                 }
-                callback(0);
+                callback(3000);
 
 
 

@@ -11,7 +11,45 @@ var videosrc = "";
 var last = true;
 angular.module('starter', ['ionic', 'app.controllers', 'app.services'])
 
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, $rootScope,$state,$ionicPopup,$ionicHistory) {
+
+        $ionicPlatform.registerBackButtonAction(function(e) {
+            e.preventDefault();
+            /**
+             * 退出app
+             */
+            function showConfirm() {
+                $ionicPopup.confirm({
+                    title: '<strong>温馨提示</strong>',
+                    subTitle: '<p>确定退出移动急救平台?</p>',
+                    okText: '退 出',
+                    okType: 'button-positive',
+                    cancelText: '取 消'
+                }).then(function(res) {
+                    if (res) {
+                        ionic.Platform.exitApp();
+                    } else {
+                        // Don't close
+                    }
+                });
+            }
+
+            /**
+             *
+             * @param title 标题
+             * @param content 内容
+             */
+            // Is there a page to go back to?
+            if ($ionicHistory.backView()) {
+
+                $ionicHistory.goBack(-1);
+            } else {
+                // This is the last page: Show confirmation popup
+                showConfirm();
+            }
+            return false;
+        }, 101);
+
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -51,7 +89,7 @@ angular.module('starter', ['ionic', 'app.controllers', 'app.services'])
                 views: {
                     'menuContent': {
                         //templateUrl: 'templates/search.html'
-                        templateUrl: localStorage.serverurl + 'templates/search.html?t=' + (new Date().getTime()),
+                        templateUrl: localStorage.serverurl + 'templates/search.html?t=' + (new Date().getTime())
                     }
                 }
             })
