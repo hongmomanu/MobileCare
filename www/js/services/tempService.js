@@ -30,6 +30,12 @@ angular.module('app.services')
                             return response;
                 });
             },
+            getRecordByKey:function(key){
+                return $http.get(serverurl+"temp/getrecordbykey",
+                    {params:{key:key}}).then(function(response) {
+                        return response;
+                    });
+            },
             addnewRecord: function(item) {
 
                 return $http.post(serverurl+"temp/addrecord",

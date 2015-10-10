@@ -2,11 +2,12 @@
   <ion-nav-title>
     <div class="item item-input-inset">
       <label class="item-input-wrapper">
-        <i class="icon ion-ios-search placeholder-icon"></i>
-        <input ng-click="doSearch()" style="width: 100%;" type="search" value="{{searchkey}}" placeholder="输入急救患者姓名或卡号查询">
-        <!--<button class="button icon ion-home">Home</button>-->
-        <i ng-click="doSearch()"  class="icon ion-ios-search"></i>
+        <i   class="icon ion-ios-search placeholder-icon"></i>
+        <input  style="width: 100%;" type="text" ng-model="searchkey"  placeholder="输入急救患者姓名或卡号查询">
+
+        <!--<i ng-click="doSearch()"  class="icon ion-ios-search"></i>-->
       </label>
+      <button ng-click="doSearch(searchkey)" class="button icon ion-search"></button>
     </div>
 
     <!--<div>

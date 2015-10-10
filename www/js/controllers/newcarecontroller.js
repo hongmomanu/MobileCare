@@ -118,7 +118,7 @@ angular.module('app.controllers')
         tempService.getRecordByPage(1, 10).then(function (response) {
             $scope.caredetails = response.data;
         });
-        $scope.searchkey="";
+        //$scope.searchkey="";
 
         $scope.doRefresh = function () {
             //alert(1);
@@ -127,8 +127,12 @@ angular.module('app.controllers')
                 $scope.$broadcast("scroll.refreshComplete");
             });
         };
-        $scope.doSearch=function(){
-            alert(1);
+        $scope.doSearch=function(searchkey){
+            tempService.getRecordByKey(searchkey).then(function (response) {
+                $scope.caredetails = response.data;
+                //$scope.$broadcast("scroll.refreshComplete");
+            });
+
         };
 
 
