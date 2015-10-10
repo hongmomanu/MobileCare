@@ -1,4 +1,36 @@
-<ion-view view-title="急救患者">
+<ion-view>
+  <ion-nav-title>
+    <div class="item item-input-inset">
+      <label class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input ng-click="doSearch()" style="width: 100%;" type="search" value="{{searchkey}}" placeholder="输入急救患者姓名或卡号查询">
+        <!--<button class="button icon ion-home">Home</button>-->
+        <i ng-click="doSearch()"  class="icon ion-ios-search"></i>
+      </label>
+    </div>
+
+    <!--<div>
+      <input type="text" placeholder="输入商户名搜索">
+      <button class="button icon ion-home">Home</button>
+    </div>-->
+
+
+     <!-- <input type="text" placeholder="输入急救患者姓名或卡号查询" value="{{searchkey}}">
+
+
+
+      <button class="button icon ion-home">Home</button>-->
+
+
+  </ion-nav-title>
+  <!--<ion-header-bar class="bar-stable bar bar-positive" align-title="center" >
+
+
+    &lt;!&ndash;<button class="button button-icon icon ion-android-menu"
+            ng-click="configmodal.show()"
+            side="right" >
+    </button>&ndash;&gt;
+  </ion-header-bar>-->
   <ion-content>
     <ion-refresher
             pulling-text="下拉刷新..."
