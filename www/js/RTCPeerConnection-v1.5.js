@@ -311,6 +311,8 @@ RTCPeerConnection.iceServers.push({
     username: 'webrtc'
 });
 
+/*
 loadIceFrame(function(servers) {
     RTCPeerConnection.iceServers = RTCPeerConnection.iceServers.concat(servers);
 });
+*/

@@ -1,2 +1,5 @@
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore platforms/android/affixApp.keystore platforms/android/build/outputs/apk/android-armv7-release-unsigned.apk affixApp
 123456
+
+socketjs 是保存视频服务器
+sockeio-over-nodejs 是webrtc在线视频服务器

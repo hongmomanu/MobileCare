@@ -4,9 +4,11 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var serverurl = "http://192.168.2.100:3000/";
-var socketurl = "http://192.168.2.100:8001/";
-var broadcasturl = "http://192.168.2.100:8888/";
+var serverurl = localStorage.serverurl.replace(/(:\d+)/g,":3000");//"http://192.168.2.100:3000/"
+//var socketurl = localStorage.serverurl.replace(/(:\d+)/g,":8001");//"http://192.168.2.100:8001/";
+var socketurl = "http://111.1.76.108:8001/";
+//var broadcasturl = localStorage.serverurl.replace(/(:\d+)/g,":8888");//"http://192.168.2.100:8888/";
+var broadcasturl = "http://111.1.76.108:8888/";
 var videosrc = "";
 var last = true;
 angular.module('starter', ['ionic', 'app.controllers', 'app.services'])
@@ -40,6 +42,7 @@ angular.module('starter', ['ionic', 'app.controllers', 'app.services'])
              * @param content 内容
              */
             // Is there a page to go back to?
+
             if ($ionicHistory.backView()) {
 
                 $ionicHistory.goBack(-1);
@@ -170,7 +173,7 @@ angular.module('starter', ['ionic', 'app.controllers', 'app.services'])
             })
             .state('index.caredetails', {
                 url: '/caredetails',
-                //cache: false,
+                cache: false,
                 views: {
                     'menuContent': {
                         //templateUrl: 'templates/caredetails.html',

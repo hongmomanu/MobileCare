@@ -64,5 +64,6 @@ angular.module('app.controllers')
 
     .controller('PlaylistCtrl', function ($scope, $stateParams, $http) {
 
-
+        testobj = $http;
+        console.log(22);
     });
