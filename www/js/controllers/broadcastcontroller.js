@@ -51,7 +51,6 @@ angular.module('app.controllers')
                         if (config.callback) config.callback(socket);
                     });
 
-                    console.log(4444444)
                     socket.send = function (message) {
                         socket.emit('message', {
                             sender: sender,
@@ -70,9 +69,7 @@ angular.module('app.controllers')
                     video.setAttribute('controls', true);
 
                     if(participants.childElementCount>0)video.style.display='none';
-                    //alert()
                     participants.insertBefore(video, participants.firstChild);
-                    //$(video).hide();
                     testobj=participants;
                     console.log(participants);
 
@@ -82,8 +79,6 @@ angular.module('app.controllers')
                 },
                 onRoomFound: function(room) {
 
-                    //alert(111);
-                    //console.log(room);
                     $ionicLoading.hide();
                     var alreadyExist = document.getElementById(room.broadcaster);
                     if (alreadyExist) return;
@@ -180,9 +175,6 @@ angular.module('app.controllers')
         /* on page load: get public rooms */
 
         broadcastUI = broadcast(config);
-
-
-
 
         function hideUnnecessaryStuff() {
             var visibleElements = document.getElementsByClassName('visible'),
