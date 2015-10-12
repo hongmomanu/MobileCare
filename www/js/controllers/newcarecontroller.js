@@ -191,7 +191,7 @@ angular.module('app.controllers')
                     var data = angular.copy($scope.savedata);
                     delete  data._id;
                     delete data.time;
-                    data.videosrc=videosrc;
+                    if(!data.videosrc)data.videosrc=videosrc;
 
                     tempService.saveRecordById($stateParams.caredetailId, data).then(function (response) {
                         if (response.data.success) {
