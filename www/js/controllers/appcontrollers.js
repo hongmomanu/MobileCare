@@ -16,7 +16,7 @@ angular.module('app.controllers')
         };
 
         // Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl(localStorage.serverurl+'templates/login.html', {
+        /*$ionicModal.fromTemplateUrl(localStorage.serverurl+'templates/login.html', {
             scope: $scope
         }).then(function (modal) {
             $scope.modal = modal;
@@ -25,7 +25,7 @@ angular.module('app.controllers')
         // Triggered in the login modal to close it
         $scope.closeLogin = function () {
             $scope.modal.hide();
-        };
+        };*/
 
         // Open the login modal
 
@@ -54,6 +54,23 @@ angular.module('app.controllers')
 
         };
         $scope.signIn();
+
+        $scope.newUser=function(){
+            $ionicModal.fromTemplateUrl(localStorage.serverurl+'templates/registermodel.html', {
+                scope: $scope
+            }).then(function (modal) {
+                $scope.reg_modal = modal;
+                $scope.reg_modal.show();
+            });
+        };
+
+        $scope.cancel=function(){
+
+           $scope.reg_modal.hide();
+
+        };
+
+
 
 
     })
