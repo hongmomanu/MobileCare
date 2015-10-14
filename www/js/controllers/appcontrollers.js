@@ -14,6 +14,7 @@ angular.module('app.controllers')
             password:localStorage.password,
             realname:localStorage.realname
         };
+        $scope.newuser={};
 
         // Create the login modal that we will use later
         /*$ionicModal.fromTemplateUrl(localStorage.serverurl+'templates/login.html', {
@@ -69,13 +70,29 @@ angular.module('app.controllers')
            $scope.reg_modal.hide();
 
         };
-        $scope.register=function(user){
+        $scope.register=function(newuser){
 
             //alert(1);
-            //console.log(user);
-            if(user.password!=user.repassword){
+            //console.log(newuser);
 
+            if(!newuser.username){
+                $ionicLoading.show({template: '用户名不能为空',duration: 1500});
+                return;
             }
+            if(!newuser.realname){
+                $ionicLoading.show({template: '姓名不能为空',duration: 1500});
+                return;
+            }
+            if(!newuser.password){
+                $ionicLoading.show({template: '密码不能为空',duration: 1500});
+                return;
+            }
+            if(newuser.password!=newuser.repassword){
+                $ionicLoading.show({template: '密码输入不一致...',duration: 1500});
+                return;
+            }
+
+
 
         };
 
