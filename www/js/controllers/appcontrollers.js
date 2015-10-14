@@ -64,9 +64,18 @@ angular.module('app.controllers')
             });
         };
 
-        $scope.cancel=function(){
+        $scope.cancel_reg=function(){
 
            $scope.reg_modal.hide();
+
+        };
+        $scope.register=function(user){
+
+            //alert(1);
+            //console.log(user);
+            if(user.password!=user.repassword){
+
+            }
 
         };
 

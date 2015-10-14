@@ -10,6 +10,13 @@ angular.module('app.services')
                     { params:{ "username": username, "password": password } }).then(function(response) {
                             return response;
                 });
+            },
+            useradd: function(username,realname,password) {
+
+                return $http.post(serverurl+"user/adduser",
+                    { "username": username, "password": password,"realname":realname }).then(function(response) {
+                            return response;
+                });
             }
         }
     });
