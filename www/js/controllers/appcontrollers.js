@@ -14,7 +14,7 @@ angular.module('app.controllers')
             password:localStorage.password,
             realname:localStorage.realname
         };
-        $scope.newuser={};
+        //$scope.newuser={};
 
         // Create the login modal that we will use later
         /*$ionicModal.fromTemplateUrl(localStorage.serverurl+'templates/login.html', {
@@ -70,27 +70,47 @@ angular.module('app.controllers')
            $scope.reg_modal.hide();
 
         };
-        $scope.register=function(newuser){
+        $scope.register=function(user){
 
             //alert(1);
             //console.log(newuser);
 
-            if(!newuser.username){
+            if(!user.username){
                 $ionicLoading.show({template: '用户名不能为空',duration: 1500});
                 return;
             }
-            if(!newuser.realname){
+            if(!user.realname){
                 $ionicLoading.show({template: '姓名不能为空',duration: 1500});
                 return;
             }
-            if(!newuser.password){
+            if(!user.password){
                 $ionicLoading.show({template: '密码不能为空',duration: 1500});
                 return;
             }
-            if(newuser.password!=newuser.repassword){
-                $ionicLoading.show({template: '密码输入不一致...',duration: 1500});
+            if(user.password!=user.repassword){
+                $ionicLoading.show({template: '密码输入不一致',duration: 1500});
                 return;
             }
+
+            $ionicLoading.show({template: '注册中...',duration: 5000});
+            userService.useradd(user.username,user.realname,user.password).then(function (response) {
+                $ionicLoading.hide();
+                if (response.data.success) {
+                    $scope.reg_modal.hide();
+                    localStorage.username=user.username;
+                    localStorage.password=user.password;
+                    localStorage.realname=user.realname;
+                    $state.go('index.search');
+                } else {
+                    var alertPopup = $ionicPopup.alert({
+                        title: '注册提示',
+                        template: response.data.message
+                    });
+                    alertPopup.then(function (res) {
+                        //console.log(res);
+                    });
+                }
+            });
 
 
 
