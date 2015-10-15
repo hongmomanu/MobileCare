@@ -21,7 +21,7 @@
             if(!localStorage.serverurl)localStorage.serverurl="http://192.168.2.100:8100/";
 
             $.ajax({
-                url: localStorage.serverurl,
+                url: localStorage.serverurl+"hellomobliecare",
                 success: function(data){
                     window.location='./main.html';
                 },
