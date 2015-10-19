@@ -27,12 +27,20 @@ angular.module('app.controllers')
         $scope.newcarenocardnext = function (user) {
 
             console.log(user);
+            if(!user.username){
+                $ionicLoading.show({template: '未填写姓名', duration: 10000});
+                return;
+            }
             $state.go('index.selecttemp', user);
 
         };
 
         $scope.newcarecardnext = function (user) {
             console.log(user);
+            if(!user.cardno){
+                $ionicLoading.show({template: '未填写卡号', duration: 10000});
+                return;
+            }
             //alert(11);
             $state.go('index.selecttemp', user);
             //$state.go('index.choosetemp');
