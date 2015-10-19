@@ -7,6 +7,8 @@
 var serverurl = localStorage.serverurl.replace(/(:\d+)/g,":3000");//"http://192.168.2.100:3000/"
 //var socketurl = localStorage.serverurl.replace(/(:\d+)/g,":8001");//"http://192.168.2.100:8001/";
 var socketurl = "http://111.1.76.108:8001/";
+
+var staticurl="http://111.1.76.108/"
 //var broadcasturl = localStorage.serverurl.replace(/(:\d+)/g,":8888");//"http://192.168.2.100:8888/";
 var broadcasturl = "http://111.1.76.108:8888/";
 var videosrc = "";

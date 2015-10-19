@@ -8,8 +8,13 @@
 
 
     <div class="scroll-content has-header  light">
-      <video id="recordingvideo" src="{{trustSrc(playvideosrc)}}" width="100%" height="100%"  controls="controls" autoplay="true">
+      <video id="recordingvideo" src="{{trustSrc(playvideosrc)}}" width="100%" height="100%" preload="auto"  controls="controls" >
       </video>
+
+      <!--<video id="recordingvideo"  controls="" autoplay="" name="media">
+        <source src="{{trustSrc(playvideosrc)}}" type="video/webm">
+
+      </video>-->
     </div>
 
 </ion-modal-view>

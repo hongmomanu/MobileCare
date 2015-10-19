@@ -154,11 +154,13 @@ angular.module('app.controllers')
 
         $scope.playvideosrc="";
         $scope.trustSrc = function(src) {
-            return $sce.trustAsResourceUrl(socketurl+src+'/web.webm');
+            return $sce.trustAsResourceUrl(staticurl+src+'/web.webm');
         }
 
         $scope.playvideo = function (url) {
             //alert(11);
+            //alert(socketurl+url+'/web.webm');
+            //VideoPlayer.play(socketurl+url+'/web.webm');
             $scope.playvideosrc=url;
             if(!$scope.videomodal){
                 $ionicModal.fromTemplateUrl(localStorage.serverurl+'templates/videomodel.html', {
