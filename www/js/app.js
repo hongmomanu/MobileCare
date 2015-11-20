@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var serverurl = localStorage.serverurl.replace(/(:\d+)/g,":3000");//"http://192.168.2.100:3000/"
+var serverurl = localStorage.serverurl;//"http://192.168.2.100:3000/"
 //var socketurl = localStorage.serverurl.replace(/(:\d+)/g,":8001");//"http://192.168.2.100:8001/";
 var socketurl = "http://111.1.76.108:8001/";
 
@@ -15,7 +15,7 @@ var videosrc = "";
 var last = true;
 angular.module('starter', ['ionic', 'app.controllers', 'app.services'])
 
-    .run(function ($ionicPlatform, $rootScope,$state,$ionicPopup,$ionicHistory) {
+    .run(function ($ionicPlatform, $rootScope,$state,$ionicPopup,$ionicHistory,$ionicLoading,$timeout) {
 
         $ionicPlatform.registerBackButtonAction(function(e) {
             e.preventDefault();
@@ -31,7 +31,13 @@ angular.module('starter', ['ionic', 'app.controllers', 'app.services'])
                     cancelText: '取 消'
                 }).then(function(res) {
                     if (res) {
-                        ionic.Platform.exitApp();
+                        $rootScope.$broadcast('stoprecording');
+                        $ionicLoading.show({template: '正在关闭程序...', duration: 5000});
+                        $timeout(function () {
+                            ionic.Platform.exitApp();
+                        },5000);
+
+
                     } else {
                         // Don't close
                     }

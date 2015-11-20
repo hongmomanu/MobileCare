@@ -309,7 +309,7 @@ angular.module('app.controllers')
                                     'username':localStorage.username,
                                     'adata':audioRecorder.getBlob()
                                 });
-                                if(!last)callback(10000);
+                                if(!last)callback(timeno);//10000
                             })
                             //mediaElement.src = videoURL; //plays the recorded blob url on that src
 
